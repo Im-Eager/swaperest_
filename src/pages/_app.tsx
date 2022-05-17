@@ -13,7 +13,7 @@ function MyApp(props: { Component: any; pageProps: any }) {
     return (
         <>
             <Component {...pageProps} />
-            <LoginForm />
+            {/* <LoginForm /> */}
             <RegisterForm />;
         </>
     );

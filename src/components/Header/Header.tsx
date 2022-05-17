@@ -1,6 +1,15 @@
 import Head from "next/head";
 
 function Header() {
+    function loginRegister() {
+        return (
+            <div className="login-register">
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            </div>
+        );
+    }
+
     return (
         <>
             <Head>
@@ -13,14 +22,14 @@ function Header() {
                     <img src="/logo.png" alt="logo" />
                 </div>
 
-                <input type="text" placeholder="Search"></input>
+                <input type="text" placeholder="🔎 Search"></input>
 
                 <div className="header_notifications">
                     <img src="/notifications.png" />
                 </div>
 
                 <div className="header_user">
-                    <img src="/user.png" />
+                    <img onClick={loginRegister} src="/user.png" />
                 </div>
             </header>
         </>
