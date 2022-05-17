@@ -1,20 +1,25 @@
-import { useDebugValue, useState } from "react";
+import { useState } from "react";
 import styles from "./pin.module.css";
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en.json'
 
-export interface IPin {
-    id: string;
+TimeAgo.addLocale(en)
+const timeAgo = new TimeAgo('en-US')
+
+interface PinProps {
+    _id: string;
     title: string;
     url: string;
-    author: string;
+    author: {
+        id: string;
+        username: string;
+    };
     commentsCount: number;
-    date: Date;
+    date: number;
     likesCount: number;
     dislikesCount: number;
 }
 
-interface PinProps {
-    value: IPin;
-}
 
 // function getHArdCodedProps() {}
 
@@ -30,7 +35,9 @@ interface PinProps {
 // TODO: todas as funções que vão ter intervenção por exmeplo no onclick, tem de estar dentro da função que define a sincronização?
 
 function Pin(props: PinProps) {
-    const { value } = props;
+    const { _id, title, url, author, commentsCount, date, likesCount, dislikesCount } = props;
+
+    const time = timeAgo.format(new Date(date), 'mini');
 
     const [isLiked, setIsLiked] = useState(0);
     const [isDisliked, setIsDisliked] = useState(0);
@@ -53,10 +60,9 @@ function Pin(props: PinProps) {
     return (
         <>
             <div className="pin">
-                <img className={styles.pinImage} src={value.url} alt={value.title} />
+                <img className={styles.pinImage} src={url} alt={title} />
                 <div onClick={handleAuthor} className={styles.author}>
-                    {value.author}
-                    <span className={styles.date}> {value.date.toLocaleDateString()}</span>
+                    {author.username}<span className={styles.date}>  {time}</span>
                 </div>
 
                 <button onClick={handleSave} className={styles.pinSaveButton}>
@@ -77,4 +83,6 @@ function Pin(props: PinProps) {
     );
 }
 
-export { Pin };
+export { Pin };    
+export type { PinProps };
+
