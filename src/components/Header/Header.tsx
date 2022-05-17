@@ -1,13 +1,11 @@
+import Head from "next/head";
+
 function Header() {
     return (
         <>
-            <link
-                rel="icon"
-                type="image/png"
-                sizes="16x16"
-                href="C:/Users/tiago/Desktop/Work/MindSwap2/FrontEnd/MyGitRepo/Mindarest/public/favicon16.png"
-            />
-
+            <Head>
+                <link rel="icon" type="image/png" sizes="16x16" href="/favicon16.png" />
+            </Head>
             <header>
                 <title>Mindarest</title>
 
