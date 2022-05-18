@@ -1,5 +1,5 @@
 .logo {
-    width: 15%;
+    width: 10%;
 }
 
 .registerForm {
@@ -20,9 +20,10 @@
     border: 0;
     color: white;
     border-radius: 30px;
-    font-size: 20px;
+    font-size: 15px;
     font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
     padding: 12px;
+    margin-top: 20px;
 }
 
 .form {
@@ -33,7 +34,7 @@
     font-size: 15px;
     font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
     border-radius: 60px;
-    padding-bottom: 20px;
+    padding: 8px;
 }
 
 .input {
@@ -46,7 +47,7 @@
 }
 
 .welcome,
-.signUp {
+.pleaseLogin {
     font-size: 20px;
     font-weight: 600;
     font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
