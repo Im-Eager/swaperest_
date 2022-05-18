@@ -1,3 +1,7 @@
+import { LoginForm } from "../components/LoginForm/LoginForm";
+import { RegisterForm } from "../components/registerForm/RegisterForm";
+import styles from "./registerForm.module.css";
+
 import "../styles.css";
 import "./home.css";
 
@@ -8,7 +12,9 @@ function MyApp(props: { Component: any; pageProps: any }) {
 
     return (
         <>
-            <Component {...pageProps} />;
+            <Component {...pageProps} />
+            {<LoginForm />}
+            {<RegisterForm />}
         </>
     );
 }

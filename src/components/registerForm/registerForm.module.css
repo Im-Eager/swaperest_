@@ -1,0 +1,53 @@
+.logo {
+    width: 15%;
+}
+
+.registerForm {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    padding: 32px 0px;
+    text-align: center;
+    width: 400px;
+    margin: auto;
+}
+
+.registerButton {
+    background-color: rgb(204, 34, 34);
+    border: 0;
+    color: white;
+    border-radius: 30px;
+    font-size: 20px;
+    font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
+    padding: 12px;
+}
+
+.form {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    border-radius: 0px;
+    font-size: 15px;
+    font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
+    border-radius: 60px;
+    padding-bottom: 20px;
+}
+
+.input {
+    display: flex;
+    align-self: center;
+    width: 50%;
+    border-radius: 30px;
+    padding: 10px;
+    border-color: lightgray;
+}
+
+.welcome,
+.signUp {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
+}

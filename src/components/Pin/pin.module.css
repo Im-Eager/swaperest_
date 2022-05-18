@@ -70,3 +70,8 @@
     font-weight: 600;
     color: darkgray;
 }
+
+.loginForm {
+    position: absolute;
+    background-color: red;
+}

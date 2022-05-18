@@ -27,5 +27,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Im-Eager/swaperest_.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Im-Eager/swaperest_/issues"
+  },
+  "homepage": "https://github.com/Im-Eager/swaperest_#readme",
   "description": ""
 }

@@ -1,4 +1,4 @@
-import styles from "./CommentsSection.module.css";
+import styles from "./CommentsSection.module.css"
 import { DetailedPinComments } from "../DetailedPinComments/DetailedPinComments"
 import {CommentDetailedPin } from "../DetailedPin/DetailedPin"
 

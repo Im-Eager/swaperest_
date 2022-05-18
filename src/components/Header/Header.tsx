@@ -1,4 +1,6 @@
 import { useRouter } from 'next/router';
+import Head from "next/head";
+
 
 function Header() {
 
@@ -6,13 +8,9 @@ function Header() {
 
     return (
         <>
-            <link
-                rel="icon"
-                type="image/png"
-                sizes="16x16"
-                href="C:/Users/tiago/Desktop/Work/MindSwap2/FrontEnd/MyGitRepo/Mindarest/public/favicon16.png"
-            />
-
+            <Head>
+                <link rel="icon" type="image/png" sizes="16x16" href="/favicon16.png" />
+            </Head>
             <header>
                 <title>Mindarest</title>
 
@@ -23,7 +21,7 @@ function Header() {
                 <input type="text" placeholder="Search"></input>
 
                 <div className="header_notifications">
-                    <img src="/notifications.png" />
+                    <img onClick={() => router.push(`http://localhost:3000`)} src="/logo.png" alt="logo" />
                 </div>
 
                 <div className="header_user">
