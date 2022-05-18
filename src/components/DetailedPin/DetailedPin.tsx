@@ -1,23 +1,62 @@
-import { url } from "inspector";
-import { PinProps } from "../Pin/Pin";
+import { useState } from "react";
 import styles from './DetailedPin.module.css';
+import { CommentsSection } from "../CommentsSection/CommentsSection"
 
 interface DetailedPinProps{
+    id: string;
     url: string;
     title: string;
     avatar: string;
     username: string;
     followers: number[];
+    likes: number;
+    dislikes: number;
+    comments: string[];
+}
+
+interface CommentDetailedPin{
+    text:string,
+    author:{
+        avatar: string,
+        username: string,
+    }
+    date: number;
 }
 
 function getWebsiteUrl(originalUrl: string){
     return originalUrl.slice(0, originalUrl.indexOf("/",14));
 }
 
+
 function DetailedPinComponent(props: DetailedPinProps) {
-    const {url, title, avatar, username, followers} = props;
+    const {id, url, title, avatar, username, followers, likes, dislikes, comments} = props;
     const websiteUrl = getWebsiteUrl(url);
 
+    const[commentButtonIsToggled, setCommentButtonIsToggled] = useState(false);
+    const[commentsAreLoaded, setCommentsAreLoaded]= useState(true);
+    const[commentsArray, setCommentsArray] = useState([] as CommentDetailedPin[])
+
+
+    async function getComments(id: string){
+        const commentsResponse = await fetch(`http://localhost:3000/api/comments/${id}`, {
+            method: "GET",
+            headers: 
+        {
+          "Content-Type": 
+          "application/json",
+        },
+          });
+        
+          const comments = await commentsResponse.json() as CommentDetailedPin[];
+
+
+          setCommentsAreLoaded(true);
+          setCommentsArray(comments);
+          
+    }   
+    
+    getComments(id);
+    
     return (
         <>
             <main className={styles.pinDetailed}>
@@ -49,7 +88,15 @@ function DetailedPinComponent(props: DetailedPinProps) {
                             </div>
                             <button className={styles.pinDetailedFollowButton}>Follow</button>
                         </div>
-                        <div className={styles.pinDetailedCommentsSection}>4 comments</div>
+                        <div className={styles.pinDetailedLikesSection}>
+                            <span className={styles.pinDetailedLikes}>{likes} 💗</span>
+                            <span className={styles.pinDetailedDisikes}>{dislikes} 💔</span>
+                        </div>
+                        <div className={styles.pinDetailedCommentsSection}>
+                            <span className={styles.pinDetailedCommentsNumber}>{comments.length} comments</span>
+                            <button className={styles.pinDetailedCommentsButton} disabled={commentsAreLoaded?false:true} onClick={() => setCommentButtonIsToggled(!commentButtonIsToggled)}>{commentButtonIsToggled ?"v":">"}</button>
+                        </div>
+                            {commentsAreLoaded && commentButtonIsToggled ? <CommentsSection commentsArray={commentsArray} />:null}
                     </aside>
                     
                 </article>
@@ -59,5 +106,6 @@ function DetailedPinComponent(props: DetailedPinProps) {
 }
 
 export { DetailedPinComponent };    
+export type {CommentDetailedPin}
 
 

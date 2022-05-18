@@ -7,13 +7,17 @@ import { Header } from "../../components/Header/Header";
 import {DetailedPinComponent} from "../../components/DetailedPin"
 
 interface DetailedPinProps {
+    _id: string;
     url: string;
     title: string;
     author: {
         username: string;
-        followers: number;
+        followers: number[];
         avatar: string;
     }
+    likesCount: number;
+    dislikesCount: number;
+    comments: string[];
 }
 
 interface DetailedPin {
@@ -21,10 +25,10 @@ interface DetailedPin {
 }
 
 function DetailedPin(props: DetailedPin){
-    const {url, author, title} = props.pin;
+    const {_id, url, author, title, likesCount, dislikesCount, comments} = props.pin;
 return <>
     <Header />
-    <DetailedPinComponent url={url} title={title} avatar={author.avatar} username={author.username} followers={author.followers}/>
+    <DetailedPinComponent id={_id} url={url} title={title} avatar={author.avatar} username={author.username} followers={author.followers} likes={likesCount} dislikes={dislikesCount} comments={comments}/>
 </>
 }
 

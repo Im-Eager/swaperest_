@@ -1,4 +1,9 @@
+import { useRouter } from 'next/router';
+
 function Header() {
+
+    const router = useRouter();
+
     return (
         <>
             <link
@@ -12,7 +17,7 @@ function Header() {
                 <title>Mindarest</title>
 
                 <div className="header_logo">
-                    <img src="/logo.png" alt="logo" />
+                    <img onClick={() => router.push(`http://localhost:3000`)} src="/logo.png" alt="logo" />
                 </div>
 
                 <input type="text" placeholder="Search"></input>

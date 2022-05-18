@@ -11,6 +11,10 @@ header .header_user {
     height: 40px;
 }
 
+.header_logo{
+    cursor: pointer;
+}
+
 header .header_notifications,
 header .header_user {
     padding: 10px;
