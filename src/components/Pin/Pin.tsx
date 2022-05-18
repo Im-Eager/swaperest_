@@ -7,7 +7,7 @@ export interface IPin {
     url: string;
     author: string;
     commentsCount: number;
-    date: Date;
+    date: number;
     likesCount: number;
     dislikesCount: number;
 }
@@ -56,7 +56,7 @@ function Pin(props: PinProps) {
                 <img className={styles.pinImage} src={value.url} alt={value.title} />
                 <div onClick={handleAuthor} className={styles.author}>
                     {value.author}
-                    <span className={styles.date}> {value.date.toLocaleDateString()}</span>
+                    <span className={styles.date}> {value.date}</span>
                 </div>
 
                 <button onClick={handleSave} className={styles.pinSaveButton}>
