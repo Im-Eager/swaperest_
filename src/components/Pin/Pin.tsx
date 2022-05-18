@@ -21,20 +21,6 @@ interface PinProps {
     dislikesCount: number;
 }
 
-
-// function getHArdCodedProps() {}
-
-// const [isLiked, setIsLiked] = useState(false);
-
-// function likeHandler(pin: IPin) {
-//   pin.likesCount++;
-// }
-
-// function unlikeHandler(pin: IPin) {
-//   pin.likesCount--;
-// }
-// TODO: todas as funções que vão ter intervenção por exmeplo no onclick, tem de estar dentro da função que define a sincronização?
-
 function Pin(props: PinProps) {
     const { _id, title, url, author, commentsCount, date, likesCount, dislikesCount } = props;
 
