@@ -1,14 +1,10 @@
+import { useRouter } from 'next/router';
 import Head from "next/head";
 
+
 function Header() {
-    function loginRegister() {
-        return (
-            <div className="login-register">
-                <a href="/login">Login</a>
-                <a href="/register">Register</a>
-            </div>
-        );
-    }
+
+    const router = useRouter();
 
     return (
         <>
@@ -19,17 +15,17 @@ function Header() {
                 <title>Mindarest</title>
 
                 <div className="header_logo">
-                    <img src="/logo.png" alt="logo" />
+                    <img onClick={() => router.push(`http://localhost:3000`)} src="/logo.png" alt="logo" />
                 </div>
 
-                <input type="text" placeholder="🔎 Search"></input>
+                <input type="text" placeholder="Search"></input>
 
                 <div className="header_notifications">
-                    <img src="/notifications.png" />
+                    <img onClick={() => router.push(`http://localhost:3000`)} src="/logo.png" alt="logo" />
                 </div>
 
                 <div className="header_user">
-                    <img onClick={loginRegister} src="/user.png" />
+                    <img src="/user.png" />
                 </div>
             </header>
         </>
@@ -37,3 +33,4 @@ function Header() {
 }
 
 export { Header };
+

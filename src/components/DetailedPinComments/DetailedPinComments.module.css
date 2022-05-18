@@ -1,0 +1,30 @@
+.DetailedPinComment{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 25px;
+}
+
+.DetailedPinCommentAvatar{
+    margin-right: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.DetailedPinCommentRightPart{
+    display: flex;
+    flex-direction: column;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,ãƒ’ãƒ©ã‚®ãƒŽè§’ã‚´ Pro W3,Hiragino Kaku Gothic Pro,ãƒ¡ã‚¤ãƒªã‚ª,Meiryo,ï¼­ï¼³ ï¼°ã‚´ã‚·ãƒƒã‚¯,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+}
+
+.DetailedPinCommentNameAndText{
+    font-size: 16px;
+}
+
+.DetailedPinCommentTimeAgo{
+    color: #767676;
+    font-size: 14px;
+    font-weight: 400;
+}
+
