@@ -14,14 +14,14 @@ function LoginForm() {
                         <input
                             className={styles.input}
                             type="text"
-                            placeholder="Enter Your Email / User"
+                            placeholder="📧 Enter Your Email / User"
                             name="Email/User"
                             required
                         ></input>
                     </label>
 
                     <label className={styles.form}>
-                        <input className={styles.input} type="password" placeholder="Enter Password" name="Password" required></input>
+                        <input className={styles.input} type="password" placeholder="🔒 Password" name="Password" required></input>
                     </label>
 
                     <label></label>
