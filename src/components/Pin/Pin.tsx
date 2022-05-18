@@ -50,8 +50,8 @@ function Pin(props: PinProps) {
     
     return (
         <>
-            <div className="pin">
-                <img onClick={() => router.push(`http://localhost:3000/pin/${_id}`)} className={styles.pinImage} src={url} alt={title} />
+            <div className={styles.pin}>
+                <img className={styles.pinImage} onClick={() => router.push(`http://localhost:3000/pin/${_id}`)} src={url} alt={title} />
                 <div onClick={handleAuthor} className={styles.author}>
                     {author.username}<span className={styles.date}>  {time}</span>
                 </div>

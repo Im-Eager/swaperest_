@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Header } from "../components/Header";
 import { Pin, PinProps} from "../components/Pin";
 import { connectToDatabase,  } from "../../util/mongodb";
+import styles from "./home.module.css";
+import { LoginForm } from "../components/LoginForm";
+import { RegisterForm } from "../components/registerForm"
 
 
 interface DBPin{
@@ -34,16 +37,31 @@ function Homepage(props: HomepageProps) {
   const {pinsArray} = props;
 
   const [pins, setPins] = useState(pinsArray);
+  const [loginFormVisible, setLoginFormVisible] = useState(false);
+  const [registerFormVisible, setRegisterFormVisible] = useState(false);
+
+  function handleLogin(){
+    setLoginFormVisible(true);
+    setRegisterFormVisible(false);
+  }
+
+  function handleRegister(){
+    setLoginFormVisible(false);
+    setRegisterFormVisible(true);
+  }
+  
 
   return (
     <>
   
-      <Header />
-      <main>
+      <Header login={handleLogin} register={handleRegister} />
+      <main className={styles.homepage_main}>
         {pins.map(pin =>  
-<Pin key={pin._id} _id={pin._id} title={pin.title} url={pin.url} author={pin.author} commentsCount= {pin.commentsCount} date={pin.date}
+          <Pin key={pin._id} _id={pin._id} title={pin.title} url={pin.url} author={pin.author} commentsCount= {pin.commentsCount} date={pin.date}
           likesCount={pin.likesCount} dislikesCount={pin.dislikesCount} />
-)}
+        )}
+        {loginFormVisible ? <LoginForm /> : null}
+        {registerFormVisible ? <RegisterForm /> : null}
       </main>
     </>
   );

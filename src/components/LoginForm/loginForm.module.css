@@ -1,5 +1,5 @@
 .logo {
-    width: 15%;
+    width: 10%;
 }
 
 .loginForm {
@@ -13,6 +13,7 @@
     text-align: center;
     width: 400px;
     margin: auto;
+    box-shadow: rgb(0 0 0 / 40%) 0px 1px 20px 0px;
 }
 
 .loginButton {
