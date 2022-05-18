@@ -1,3 +1,7 @@
+.pin{
+    cursor: pointer;
+}
+
 .pinSaveButton {
     position: absolute;
     top: 3%;
