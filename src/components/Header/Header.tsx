@@ -16,7 +16,7 @@ function Header() {
                 <input type="text" placeholder="Search"></input>
 
                 <div className="header_notifications">
-                    <img src="/notifications.png" />
+                    <img onClick={() => router.push(`http://localhost:3000`)} src="/logo.png" alt="logo" />
                 </div>
 
                 <div className="header_user">
