@@ -13,9 +13,9 @@ function MyApp(props: { Component: any; pageProps: any }) {
 
     return (
         <>
-            {/* <Component {...pageProps} /> */}
-            <NewPin />
-            {/* {<LoginForm />} */}
+            {<Component {...pageProps} /> }
+            {/* <NewPin />
+            {{<LoginForm />} } */}
             {/* {<RegisterForm />} */}
         </>
     );
