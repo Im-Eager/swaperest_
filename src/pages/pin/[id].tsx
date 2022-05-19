@@ -1,34 +1,20 @@
-import {PinProps} from "../../components/Pin/Pin";
 import { connectToDatabase } from "../../../util/mongodb";
 import {DBUser, DBPin} from "../index"
 import { GetServerSideProps } from "next/types";
-import { ObjectId } from "bson";
 import { Header } from "../../components/Header/Header";
-import {DetailedPinComponent} from "../../components/DetailedPin"
-
-interface DetailedPinProps {
-    _id: string;
-    url: string;
-    title: string;
-    author: {
-        username: string;
-        followers: number[];
-        avatar: string;
-    }
-    likesCount: number;
-    dislikesCount: number;
-    comments: string[];
-}
+import { DetailedPinComponent } from "../../components/DetailedPin"
+import { DBDetailedPinProps } from "../database.types"
+import { ObjectId } from "mongodb";
 
 interface DetailedPin {
-    pin: DetailedPinProps;
+    pin: DBDetailedPinProps;
 }
 
 function DetailedPin(props: DetailedPin){
     const {_id, url, author, title, likesCount, dislikesCount, comments} = props.pin;
 return <>
     <Header />
-    <DetailedPinComponent id={_id} url={url} title={title} avatar={author.avatar} username={author.username} followers={author.followers} likes={likesCount} dislikes={dislikesCount} comments={comments}/>
+    <DetailedPinComponent id={_id} url={url} title={title} userTag={author.tag} avatar={author.avatar} username={author.username} followers={author.followers} likes={likesCount} dislikes={dislikesCount} comments={comments}/>
 </>
 }
 
@@ -60,7 +46,8 @@ const getServerSideProps: GetServerSideProps = async (context) => {
             id: pins[0].author,
             username: userById[pins[0].author].username,
             avatar: userById[pins[0].author].avatar,
-            followers:  userById[pins[0].author].followers
+            followers:  userById[pins[0].author].followers,
+            tag: userById[pins[0].author].tag,
         }
     }
 

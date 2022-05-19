@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from './DetailedPin.module.css';
 import { CommentsSection } from "../CommentsSection/CommentsSection"
+import { useRouter } from "next/router";
 
 interface DetailedPinProps{
     id: string;
@@ -12,6 +13,7 @@ interface DetailedPinProps{
     likes: number;
     dislikes: number;
     comments: string[];
+    userTag: string;
 }
 
 interface CommentDetailedPin{
@@ -29,8 +31,9 @@ function getWebsiteUrl(originalUrl: string){
 
 
 function DetailedPinComponent(props: DetailedPinProps) {
-    const {id, url, title, avatar, username, followers, likes, dislikes, comments} = props;
+    const {id, url, title, avatar, username, followers, likes, dislikes, comments, userTag} = props;
     const websiteUrl = getWebsiteUrl(url);
+    const router = useRouter();
 
     const[commentButtonIsToggled, setCommentButtonIsToggled] = useState(false);
     const[commentsAreLoaded, setCommentsAreLoaded]= useState(true);
@@ -78,7 +81,7 @@ function DetailedPinComponent(props: DetailedPinProps) {
                         <h1 className={styles.pinDetailedTitle}>{title}</h1>
                         <div className={styles.pinDetailedAuthor}>
                             <div className={styles.pinDetailedAuthorLeftPart}>
-                                <img className={styles.pinDetailedAuthorAvatar} src={avatar} />
+                                <img className={styles.pinDetailedAuthorAvatar} onClick={() => router.push(`http://localhost:3000/user/${userTag}`)} src={avatar} />
                                 <div className={styles.pinDetailedAuthorUsernameAndFollowers}>
                                     <a className={styles.pinDetailedAuthorUsername}>
                                         {username}

@@ -5,29 +5,8 @@ import { connectToDatabase,  } from "../../util/mongodb";
 import styles from "./home.module.css";
 import { LoginForm } from "../components/LoginForm";
 import { RegisterForm } from "../components/registerForm"
+import{ DBPin , DBUser } from "./database.types"
 
-
-interface DBPin{
-  _id: string;
-  title: string;
-  url: string;
-  author: string;
-  commentsCount: number;
-  date: number;
-  likesCount: number;
-  dislikesCount: number;
-}
-
-interface DBUser{
-  _id: string;
-  username: string;
-  email: string;
-  saved: string[];
-  created: string[];
-  followers: string[];
-  avatar: string;
-  password: string;
-}
 
 interface HomepageProps{
   pinsArray: PinProps[];

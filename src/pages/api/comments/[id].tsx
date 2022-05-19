@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../../../util/mongodb";
-import {DBUser} from "../../index"
+import {DBUser, DBDetailedPinProps, DBComment } from "../../databaseTypes"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   
@@ -16,16 +16,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (req.method === "GET"){
     const commentsCollection = db.collection("comments")
-    const comments = await commentsCollection.find({"pin": id}).toArray();
+    const comments = await commentsCollection.find({"pin": id}).toArray() as DBComment[];
 
     const usersCollection = db.collection("users");
-    const users = await usersCollection.find({}).toArray();
+    const users = await usersCollection.find({}).toArray() as DBUser[];
 
     const userById: Record<string, DBUser> = {};
     for(const user of users){
       userById[user._id]= user;    }
 
-    const commentsWithUser = comments.map( comment => ({...comment, author: { id: comment.user, username: userById[comment.user].username, avatar:userById[comment.user].avatar}}));
+    const commentsWithUser = comments.map( comment => ({...comment, author: { id: comment.user, username: userById[comment.user].username, avatar:userById[comment.user].avatar}}) as DBDetailedPinProps);
 
     res.json(commentsWithUser);
   }
