@@ -1,0 +1,20 @@
+.pin{
+    cursor: pointer;
+    width: 100%;
+    border-radius: 12px;
+    position: relative;
+}
+
+
+.pinImage{
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    object-fit: cover;
+    transition: 0.5;
+}
+
+
+.pinImage:hover{
+    opacity: 90%;
+}

@@ -27,10 +27,10 @@ function Header(props: HeaderProps) {
 
                 <div className={styles.header_login_request}>
                     <div className={styles.header_login_create_frame}>
-                        <img className={styles.header_img_create_account} onClick={() => register()} src="/notifications.png" alt="logo" />
+                        <img className={styles.header_img_create_account} onClick={register} src="/notifications.png" alt="logo" />
                     </div>
                     <div className={styles.header_login_create_frame}>
-                        <img className={styles.header_img_login} onClick={() => login()} src="/user.png" />
+                        <img className={styles.header_img_login} onClick={login} src="/user.png" />
                     </div>
                     
                 </div>
