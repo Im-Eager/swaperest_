@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../../util/mongodb";
 
@@ -27,18 +28,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const newUser: newUserToDB = {
         username,
         email,
-        saved: [],
-        created: [],
-        followers: [],
         avatar,
         password,
         tag: tag,
-        following: []
+        saved: [] as string[],
+        created: [] as string[],
+        followers: [] as string[],
+        following: [] as string[],
       }
     
-
-
-
     const result = await usersCollection.insertOne(newUser);
     res.status(201).send(newUser);
   }
@@ -49,5 +47,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.json(findResult);
     
   }
+
+  if (req.method === "PUT") {
+
+    const{pinId, authorId} = req.body;
+    const user =  await db.collection("users").findOne({ _id: new ObjectId(authorId.toString()) });
+    
+    const createdPins = user.created.push(pinId);
+
+    const userUpdated =  await db.collection("users").updateOne(
+      { _id: new ObjectId(authorId.toString())},
+      {
+      $push: { created: pinId.toString() }
+    })
+
+    res.status(200).send(userUpdated);
+}
+
 
 }

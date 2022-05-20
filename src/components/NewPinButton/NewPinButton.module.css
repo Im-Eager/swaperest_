@@ -1,0 +1,24 @@
+.newPinButton {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    cursor: pointer;
+    font-size: 50px;
+    color: rgb(41, 40, 40);
+    font-weight: 600;
+    border: 5px grey;
+    border-radius: 100px;
+    padding: 25px;
+    padding-top: 25px;
+    bottom: 50px;
+    right: 50px;
+}
+.newPinButton:hover {
+    background-color: grey;
+    color: rgb(191, 191, 191);
+    font-size: 60px;
+}

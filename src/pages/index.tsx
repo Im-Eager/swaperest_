@@ -9,6 +9,7 @@ import { RegisterForm } from "../components/RegisterForm"
 import{ DBPin , DBUser } from "./database.types"
 import { GetServerSideProps } from "next/types";
 import Router from "next/router";
+import {NewPinButton} from "../components/NewPinButton"
 
 
 interface HomepageProps{
@@ -72,6 +73,7 @@ function Homepage(props: HomepageProps) {
                 ))}
                 {loginFormVisible ? <LoginForm loginSubmit={onLoginSubmit} onClose={closeLoginAndRegister} onChangeToRegister={handleRegister}/> : null}
                 {registerFormVisible ? <RegisterForm onClose={closeLoginAndRegister} onChangeToLogin={handleLogin} /> : null}
+                <NewPinButton/>
             </main>
         </>
     );
@@ -114,4 +116,4 @@ const getServerSideProps: GetServerSideProps = async (context) => {
 
 export default Homepage;
 export { getServerSideProps };
-export type { DBPin, DBUser };
+export type { Session };

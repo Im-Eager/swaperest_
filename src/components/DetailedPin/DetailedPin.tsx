@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from './DetailedPin.module.css';
-import { CommentsSection } from "../CommentsSection/CommentsSection"
+import { CommentsSection } from "../CommentsSection"
+import { NewCommentSection } from "../NewCommentSection"
 import Router from "next/router";
 
 interface DetailedPinProps{
@@ -98,7 +99,11 @@ function DetailedPinComponent(props: DetailedPinProps) {
                             <span className={styles.pinDetailedCommentsNumber}>{comments.length} comments</span>
                             <button className={styles.pinDetailedCommentsButton} disabled={commentsAreLoaded?false:true} onClick={() => setCommentButtonIsToggled(!commentButtonIsToggled)}>{commentButtonIsToggled ?"v":">"}</button>
                         </div>
-                            {commentsAreLoaded && commentButtonIsToggled ? <CommentsSection commentsArray={commentsArray} />:null}
+                            {commentsAreLoaded && commentButtonIsToggled ? 
+                            (<>
+                                <CommentsSection commentsArray={commentsArray} />
+                                <NewCommentSection />
+                            </>) : null}
                     </aside>
                     
                 </article>

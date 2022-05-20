@@ -35,7 +35,7 @@ function RegisterForm(props: registerFormProps) {
                 email: email,
                 password: password,
             }),
-        })
+        })   
 
         if (response.ok){
             console.log("asd");
@@ -76,7 +76,7 @@ function RegisterForm(props: registerFormProps) {
                         {" "}
                         <input
                             className={styles.input}
-                            type="text"
+                            type="url"
                             placeholder="🖼 Please insert your avatar url"
                             name="avatarUrl"
                             required

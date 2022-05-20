@@ -9,8 +9,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { db } = await connectToDatabase();
     
     if (req.method === "GET"){
-        const editionsCollection = db.collection("users")
-        const user = await editionsCollection.findOne({email: email}) as DBUser;
+        const usersCollection = db.collection("users")
+        const user = await usersCollection.findOne({email: email}) as DBUser;
 
         
         if(!user){
