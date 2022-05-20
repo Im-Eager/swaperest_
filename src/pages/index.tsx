@@ -5,12 +5,13 @@ import { Pin, PinProps } from "../components/Pin";
 import { connectToDatabase } from "../../util/mongodb";
 import styles from "./home.module.css";
 import { LoginForm } from "../components/LoginForm";
-import { RegisterForm } from "../components/registerForm"
-import{ DBPin , DBUser } from "./database.types"
+import { RegisterForm } from "../components/registerForm";
+import { DBPin, DBUser } from "./database.types";
+import { LoggedInHeaderProps } from "../components/LoggedInHeader";
+import { User } from "../components/User";
 
-
-interface HomepageProps{
-  pinsArray: PinProps[];
+interface HomepageProps {
+    pinsArray: PinProps[];
 }
 
 function Homepage(props: HomepageProps) {
@@ -19,6 +20,7 @@ function Homepage(props: HomepageProps) {
     const [pins, setPins] = useState(pinsArray);
     const [loginFormVisible, setLoginFormVisible] = useState(false);
     const [registerFormVisible, setRegisterFormVisible] = useState(false);
+    const [loggedInHeaderVisible, setLoggedInHeaderVisible] = useState(false);
 
     function handleLogin() {
         setLoginFormVisible(true);
@@ -34,6 +36,12 @@ function Homepage(props: HomepageProps) {
         setLoginFormVisible(false);
         setRegisterFormVisible(false);
     }
+
+    // TODO:
+    function showUserPageIfLoggedIn() {
+        setLoggedInHeaderVisible(true);
+    }
+    // TODO:
 
     return (
         <>
@@ -55,6 +63,9 @@ function Homepage(props: HomepageProps) {
                 ))}
                 {loginFormVisible ? <LoginForm onClose={closeLoginAndRegister} /> : null}
                 {registerFormVisible ? <RegisterForm onClose={closeLoginAndRegister} /> : null}
+                {/* TODO: */}
+                {loggedInHeaderVisible ? <User onClose={showUserPageIfLoggedIn} /> : null}
+                {/* TODO: */}
             </main>
         </>
     );

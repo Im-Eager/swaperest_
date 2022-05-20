@@ -43,16 +43,20 @@
     justify-content: center;
 }
 
-.header_img_create_account,
-.header_img_login {
+.user_avatar,
+.logout_button {
     height: 60%;
     opacity: 80%;
     transition: 0.5s;
     cursor: pointer;
 }
 
-.header_img_create_account:hover,
-.header_img_login:hover {
+.user_avatar {
+    border-radius: 20px;
+}
+
+.user_avatar:hover,
+.logout_button:hover {
     height: 65%;
     opacity: 100%;
 }
