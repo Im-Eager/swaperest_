@@ -9,7 +9,7 @@ interface HeaderProps{
 
 function Header(props: HeaderProps) {
     const router = useRouter();
-    const {login, register} = props;
+    const { login, register } = props;
 
     return (
         <>
@@ -23,7 +23,11 @@ function Header(props: HeaderProps) {
                     <img className={styles.header_logo_img} onClick={() => router.push(`http://localhost:3000`)} src="/logo.png" alt="logo" />
                 </div>
 
-                <input className={styles.header_search_bar} type="text" placeholder="Search"></input>
+                
+                <input className={styles.header_search_bar} type="text" placeholder="Search"/>
+                    
+                
+                
 
                 <div className={styles.header_login_request}>
                     <div className={styles.header_login_create_frame}>

@@ -7,14 +7,18 @@ import styles from "./home.module.css";
 import { LoginForm } from "../components/LoginForm";
 import { RegisterForm } from "../components/registerForm"
 import{ DBPin , DBUser } from "./database.types"
+import { GetServerSideProps } from "next/types";
 
 
 interface HomepageProps{
   pinsArray: PinProps[];
+  session ?: Session;
 }
 
+interface Session extends DBUser{};
+
 function Homepage(props: HomepageProps) {
-    const { pinsArray } = props;
+    const { pinsArray, session } = props;
 
     const [pins, setPins] = useState(pinsArray);
     const [loginFormVisible, setLoginFormVisible] = useState(false);
@@ -35,10 +39,18 @@ function Homepage(props: HomepageProps) {
         setRegisterFormVisible(false);
     }
 
+    let avatar = "";
+
+    if(!session){
+        avatar = "/logo.png";
+    }else{
+        avatar= session.avatar
+    }
+
     return (
         <>
-            <Header login={handleLogin} register={handleRegister} />
-            <LoggedInHeader />
+            {session ? <LoggedInHeader avatar={avatar} /> : <Header login={handleLogin} register={handleRegister}/>}
+            
             <main className={styles.homepage_main}>
                 {pins.map((pin) => (
                     <Pin
@@ -60,12 +72,18 @@ function Homepage(props: HomepageProps) {
     );
 }
 
-async function getServerSideProps() {
+const getServerSideProps: GetServerSideProps = async (context) => {
+    const { req } = context;
     const { db } = await connectToDatabase();
 
-    const [pins, users] = await Promise.all([
+    const [pins, users, session] = await Promise.all([
         db.collection("pins").find({}).toArray() as Promise<DBPin[]>,
         db.collection("users").find({}).toArray() as Promise<DBUser[]>,
+        fetch("http://localhost:3000/api/session", {
+            headers: {
+                cookie: req.headers.cookie
+            } as HeadersInit
+        }).then(res => res.json() as Promise<Session>)
     ]);
 
     const randomPositionedPins = pins.sort((a, b) => 0.5 - Math.random());
@@ -80,9 +98,11 @@ async function getServerSideProps() {
         author: { id: pin.author, username: userById[pin.author].username },
     }));
 
+
     return {
         props: {
             pinsArray: JSON.parse(JSON.stringify(pinsWithUsername)),
+            session: session,
         },
     };
 }

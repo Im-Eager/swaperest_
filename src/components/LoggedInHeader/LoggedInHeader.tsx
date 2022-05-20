@@ -3,13 +3,12 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 
 interface LoggedInHeaderProps {
-    login?: () => void;
-    register?: () => void;
+    avatar: string;
 }
 
 function LoggedInHeader(props: LoggedInHeaderProps) {
     const router = useRouter();
-    const { login, register } = props;
+    const {avatar} = props;
 
     return (
         <>
@@ -31,11 +30,11 @@ function LoggedInHeader(props: LoggedInHeaderProps) {
                 <input className={styles.header_search_bar} type="text" placeholder="Search"></input>
 
                 <div className={styles.header_login_request}>
-                    <div className={styles.header_login_create_frame}>
-                        <img className={styles.header_img_create_account} onClick={() => register()} src="/notifications.png" alt="logo" />
+                    <div className={styles.header_avatar_logout_frame}>
+                        <img className={styles.header_img_avatar} src={avatar} alt="logo" />
                     </div>
-                    <div className={styles.header_login_create_frame}>
-                        <img className={styles.header_img_login} onClick={() => login()} src="/logout.png" />
+                    <div className={styles.header_avatar_logout_frame}>
+                        <img className={styles.header_img_logout} src="/logout.png" />
                     </div>
                 </div>
             </header>
