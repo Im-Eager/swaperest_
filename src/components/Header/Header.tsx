@@ -1,14 +1,14 @@
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 import Head from "next/head";
 import styles from "./Header.module.css";
 
 interface HeaderProps{
-    login ?: () => void;
-    register ?: () => void;
+    login : () => void;
+    register : () => void;
 }
 
 function Header(props: HeaderProps) {
-    const router = useRouter();
+
     const { login, register } = props;
 
     return (
@@ -20,7 +20,7 @@ function Header(props: HeaderProps) {
                 <title>Mindarest</title>
 
                 <div className={styles.header_logo}>
-                    <img className={styles.header_logo_img} onClick={() => router.push(`http://localhost:3000`)} src="/logo.png" alt="logo" />
+                    <img className={styles.header_logo_img} onClick={() => Router.push(`http://localhost:3000`)} src="/logo.png" alt="logo" />
                 </div>
 
                 

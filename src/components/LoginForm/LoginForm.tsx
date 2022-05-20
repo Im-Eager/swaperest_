@@ -3,6 +3,8 @@ import styles from "./loginForm.module.css";
 
 interface loginFormProps {
     onClose: () => void;
+    loginSubmit: () => void;
+    onChangeToRegister: () => void;
 }
 
 function LoginForm(props: loginFormProps) {
@@ -10,14 +12,14 @@ function LoginForm(props: loginFormProps) {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
 
-    const { onClose } = props;
+    const { onClose, loginSubmit, onChangeToRegister } = props;
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
         const email = emailRef.current.value;
-
         document.cookie = `token=${email}; max-age=9000`;
+        loginSubmit();
     }
 
 
@@ -64,7 +66,7 @@ function LoginForm(props: loginFormProps) {
                     </button>
                 </form>
 
-                <span className={styles.signUp}>Not on Mindarest yet? Sign up!</span>
+                <span className={styles.signUp}>Not on Mindarest yet? <a className={styles.linkRegister} onClick={onChangeToRegister}>Sign up!</a></span>
             </div>
         </>
     );

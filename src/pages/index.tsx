@@ -5,9 +5,10 @@ import { Pin, PinProps } from "../components/Pin";
 import { connectToDatabase } from "../../util/mongodb";
 import styles from "./home.module.css";
 import { LoginForm } from "../components/LoginForm";
-import { RegisterForm } from "../components/registerForm"
+import { RegisterForm } from "../components/RegisterForm"
 import{ DBPin , DBUser } from "./database.types"
 import { GetServerSideProps } from "next/types";
+import Router from "next/router";
 
 
 interface HomepageProps{
@@ -39,6 +40,10 @@ function Homepage(props: HomepageProps) {
         setRegisterFormVisible(false);
     }
 
+    function onLoginSubmit(){
+        Router.reload()
+    }
+
     let avatar = "";
 
     if(!session){
@@ -49,7 +54,7 @@ function Homepage(props: HomepageProps) {
 
     return (
         <>
-            {session ? <LoggedInHeader avatar={avatar} /> : <Header login={handleLogin} register={handleRegister}/>}
+            {session ? <LoggedInHeader avatar={avatar} username={session.username} /> : <Header login={handleLogin} register={handleRegister}/>}
             
             <main className={styles.homepage_main}>
                 {pins.map((pin) => (
@@ -65,8 +70,8 @@ function Homepage(props: HomepageProps) {
                         dislikesCount={pin.dislikesCount}
                     />
                 ))}
-                {loginFormVisible ? <LoginForm onClose={closeLoginAndRegister} /> : null}
-                {registerFormVisible ? <RegisterForm onClose={closeLoginAndRegister} /> : null}
+                {loginFormVisible ? <LoginForm loginSubmit={onLoginSubmit} onClose={closeLoginAndRegister} onChangeToRegister={handleRegister}/> : null}
+                {registerFormVisible ? <RegisterForm onClose={closeLoginAndRegister} onChangeToLogin={handleLogin} /> : null}
             </main>
         </>
     );

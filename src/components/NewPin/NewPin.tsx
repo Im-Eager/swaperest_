@@ -6,8 +6,6 @@ function NewPin() {
         <>
             <h2 className={styles.newPinDescription}>Please add your photo in the form below.</h2>
 
-            <User />
-
             <form className={styles.newPinForm}>
                 <label className={styles.newPinLabel}>
                     {" "}

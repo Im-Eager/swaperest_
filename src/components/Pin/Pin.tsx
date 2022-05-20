@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./pin.module.css";
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en.json'
-import { useRouter } from 'next/router'
+import Router from 'next/router'
 
 TimeAgo.addLocale(en)
 const timeAgo = new TimeAgo('en-US')
@@ -23,8 +23,6 @@ interface PinProps {
 
 function Pin(props: PinProps) {
     const { _id, title, url, author, commentsCount, date, likesCount, dislikesCount } = props;
-
-    const router = useRouter();
 
     const time = timeAgo.format(new Date(date), 'mini');
 
@@ -51,7 +49,7 @@ function Pin(props: PinProps) {
     return (
         <>
             <div className={styles.pin}>
-                <img className={styles.pinImage} onClick={() => router.push(`http://localhost:3000/pin/${_id}`)} src={url} alt={title} />
+                <img className={styles.pinImage} onClick={() => Router.push(`http://localhost:3000/pin/${_id}`)} src={url} alt={title} />
                 <div onClick={handleAuthor} className={styles.author}>
                     {author.username}<span className={styles.date}>  {time}</span>
                 </div>

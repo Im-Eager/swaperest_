@@ -25,8 +25,8 @@ const getServerSideProps: GetServerSideProps = async (context) => {
     
     const { db } = await connectToDatabase();
 
-  const[pins, users] = await Promise.all([ 
-    db.collection("pins").find({_id : new ObjectId(id.toString())}).toArray() as Promise<DBPin[]>, 
+  const[pin, users] = await Promise.all([ 
+    db.collection("pins").findOne({_id : new ObjectId(id.toString())}) as Promise<DBPin>, 
     db.collection("users").find({}).toArray() as Promise<DBUser[]>]);
     
     const userById: Record<string, DBUser> = {};
@@ -34,20 +34,20 @@ const getServerSideProps: GetServerSideProps = async (context) => {
       userById[user._id]= user;    
     }
 
-    if (pins.length<1){
+    if (!pin){
         return {
             props: {_id: null}
         }
     }
 
-    const pin = {
-        ...pins[0],
+    const pinWithAuthor = {
+        ...pin,
         author: {
-            id: pins[0].author,
-            username: userById[pins[0].author].username,
-            avatar: userById[pins[0].author].avatar,
-            followers:  userById[pins[0].author].followers,
-            tag: userById[pins[0].author].tag,
+            id: pin.author,
+            username: userById[pin.author].username,
+            avatar: userById[pin.author].avatar,
+            followers:  userById[pin.author].followers,
+            tag: userById[pin.author].tag,
         }
     }
 

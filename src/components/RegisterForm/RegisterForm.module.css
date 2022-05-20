@@ -2,7 +2,7 @@
     width: 10%;
 }
 
-.loginForm {
+.registerForm {
     position: absolute;
     background-color: rgb(255, 255, 255);
     left: 50%;
@@ -16,20 +16,19 @@
     box-shadow: rgb(0 0 0 / 40%) 0px 1px 20px 0px;
 }
 
-.loginButton {
+.registerButton {
     background-color: darkred;
     border: 0;
-    margin-bottom: 18px;
     color: white;
     border-radius: 30px;
-    font-size: 20px;
+    font-size: 15px;
     font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
     padding: 12px;
+    margin-top: 20px;
     cursor: pointer;
     transition: 0.5s;
 }
-
-.loginButton:hover{
+.registerButton:hover{
     background-color: rgb(96, 35, 35);
 }
 
@@ -41,7 +40,7 @@
     font-size: 15px;
     font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
     border-radius: 60px;
-    padding-bottom: 20px;
+    padding: 8px;
 }
 
 .input {
@@ -54,7 +53,7 @@
 }
 
 .welcome,
-.signUp {
+.pleaseLogin {
     font-size: 18px;
     font-weight: 600;
     font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
@@ -80,11 +79,11 @@
     opacity: 100%;
 }
 
-.linkRegister{
+.linkLogin{
     text-decoration: none;
     cursor: pointer;
 }
 
-.linkRegister:hover{
+.linkLogin:hover{
     text-decoration: underline;
 }
