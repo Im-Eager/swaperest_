@@ -51,9 +51,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === "PUT") {
 
     const{pinId, authorId} = req.body;
-    const user =  await db.collection("users").findOne({ _id: new ObjectId(authorId.toString()) });
-    
-    const createdPins = user.created.push(pinId);
 
     const userUpdated =  await db.collection("users").updateOne(
       { _id: new ObjectId(authorId.toString())},
@@ -62,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
 
     res.status(200).send(userUpdated);
-}
+  }
 
 
 }

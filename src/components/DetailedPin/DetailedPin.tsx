@@ -3,6 +3,8 @@ import styles from './DetailedPin.module.css';
 import { CommentsSection } from "../CommentsSection"
 import { NewCommentSection } from "../NewCommentSection"
 import Router from "next/router";
+import { DBComment, DBUser } from "../../pages/database.types"
+import { Db } from "mongodb";
 
 interface DetailedPinProps{
     id: string;
@@ -14,7 +16,7 @@ interface DetailedPinProps{
     likes: number;
     dislikes: number;
     comments: string[];
-    userTag: string;
+    authorTag: string;
 }
 
 interface CommentDetailedPin{
@@ -32,33 +34,54 @@ function getWebsiteUrl(originalUrl: string){
 
 
 function DetailedPinComponent(props: DetailedPinProps) {
-    const {id, url, title, avatar, username, followers, likes, dislikes, comments, userTag} = props;
+    const {id, url, title, avatar, username, followers, likes, dislikes, comments, authorTag} = props;
     const websiteUrl = getWebsiteUrl(url);
 
     const[commentButtonIsToggled, setCommentButtonIsToggled] = useState(false);
-    const[commentsAreLoaded, setCommentsAreLoaded]= useState(true);
+    const[commentsAreLoaded, setCommentsAreLoaded]= useState(false);
     const[commentsArray, setCommentsArray] = useState([] as CommentDetailedPin[])
 
 
-    async function getComments(id: string){
-        const commentsResponse = await fetch(`http://localhost:3000/api/comments/${id}`, {
-            method: "GET",
-            headers: 
-        {
-          "Content-Type": 
-          "application/json",
-        },
-          });
-        
-          const comments = await commentsResponse.json() as CommentDetailedPin[];
+    async function getComments(comments: string[]){
+
+        const detailedComments = await fetch(`http://localhost:3000/api/comments/${id}`, {
+                method: "GET",
+                headers: 
+            {
+                "Content-Type": 
+                "application/json",
+            },
+            }).then(res => res.json()) as DBComment[];
+
+        const users = await fetch("http://localhost:3000/api/users").then(res=>res.json()) as DBUser[];
 
 
-          setCommentsAreLoaded(true);
-          setCommentsArray(comments);
+        const userById: Record<string, DBUser> = {};
+        for (const user of users) {
+            userById[user._id] = user;
+        }
+
+        const detailedCommentsWithAuthorDetails = detailedComments.map(comment => {
+            return {
+                text: comment.text,
+                author:{
+                    avatar: userById[comment.author].avatar,
+                    username: userById[comment.author].username,
+                },
+                date: comment.date,
+            }
+        }) as CommentDetailedPin[];
+
+      setCommentsAreLoaded(true);
+      setCommentsArray(detailedCommentsWithAuthorDetails);
+
           
     }   
     
-    getComments(id);
+    if (!commentsAreLoaded){
+        getComments(comments);
+    }
+    
     
     return (
         <>
@@ -81,7 +104,11 @@ function DetailedPinComponent(props: DetailedPinProps) {
                         <h1 className={styles.pinDetailedTitle}>{title}</h1>
                         <div className={styles.pinDetailedAuthor}>
                             <div className={styles.pinDetailedAuthorLeftPart}>
-                                <img className={styles.pinDetailedAuthorAvatar} onClick={() => Router.push(`http://localhost:3000/user/${userTag}`)} src={avatar} />
+                                <img 
+                                    className={styles.pinDetailedAuthorAvatar} 
+                                    onClick={() => Router.push(`http://localhost:3000/user/${authorTag}`)} 
+                                    src={avatar} 
+                                />
                                 <div className={styles.pinDetailedAuthorUsernameAndFollowers}>
                                     <a className={styles.pinDetailedAuthorUsername}>
                                         {username}
@@ -102,7 +129,7 @@ function DetailedPinComponent(props: DetailedPinProps) {
                             {commentsAreLoaded && commentButtonIsToggled ? 
                             (<>
                                 <CommentsSection commentsArray={commentsArray} />
-                                <NewCommentSection />
+                                <NewCommentSection pinId={id}/>
                             </>) : null}
                     </aside>
                     

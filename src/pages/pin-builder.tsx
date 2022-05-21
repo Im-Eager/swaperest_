@@ -1,8 +1,10 @@
 import { GetServerSideProps } from "next/types";
-import { NewPin } from "../components/NewPin/NewPin";
-import { connectToDatabase } from "../../util/mongodb";
-import { LoggedInHeader } from "../components/LoggedInHeader/LoggedInHeader"
+import { NewPin } from "../components/NewPin";
+import { LoggedInHeader } from "../components/LoggedInHeader"
 import { Session } from "./index"
+import { useState } from "react";
+import { LogoutConfirm } from "../components/LogoutConfirm";
+import { SessionContext } from "../components/SessionContext";
 
 interface CreateNewPinProps{
     session: Session;
@@ -11,11 +13,21 @@ interface CreateNewPinProps{
 function CreateNewPin(props: CreateNewPinProps) {
 
     const { session } = props;
+    const [logoutConfirmVisible, setLogoutConfirmVisible] = useState(false);
 
-    return <>
-        <LoggedInHeader avatar={session.avatar} username={session.username} />
+    function logoutConfirm() {
+        setLogoutConfirmVisible(true);
+    }
+
+    function logoutCancel(){
+        setLogoutConfirmVisible(false);
+    }
+
+    return <SessionContext.Provider value={session}>
+        <LoggedInHeader avatar={session.avatar} username={session.username} logout={logoutConfirm}/>
         <NewPin session={session} />;
-        </>
+        {logoutConfirmVisible ? <LogoutConfirm logoutCancel={logoutCancel}/> : null}
+        </SessionContext.Provider>
 }
 
 const getServerSideProps: GetServerSideProps = async (context) => {

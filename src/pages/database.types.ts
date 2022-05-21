@@ -24,7 +24,7 @@ interface DBPin{
 
   interface DBComment{
     _id: string;
-    user: string;
+    author: string;
     text: string;
     pin: string;
     date: number;
@@ -45,4 +45,4 @@ interface DBPin{
     comments: string[];
 }
 
-export type {DBPin, DBUser, DBDetailedPinProps};
+export type {DBPin, DBUser, DBDetailedPinProps, DBComment};

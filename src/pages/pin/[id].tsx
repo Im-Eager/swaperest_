@@ -1,12 +1,14 @@
 import { connectToDatabase } from "../../../util/mongodb";
-import {DBUser, DBPin} from "../database.types"
+import {DBUser, DBPin} from "../database.types";
 import { GetServerSideProps } from "next/types";
-import { DetailedPinComponent } from "../../components/DetailedPin"
-import { DBDetailedPinProps } from "../database.types"
+import { DetailedPinComponent } from "../../components/DetailedPin";
+import { DBDetailedPinProps } from "../database.types";
 import { ObjectId } from "mongodb";
-import { Session } from "../index"
-import {LoggedInHeader} from "../../components/LoggedInHeader"
-import { SessionContext } from "../../components/NewCommentSection/SessionContext";
+import { Session } from "../index";
+import {LoggedInHeader} from "../../components/LoggedInHeader";
+import { SessionContext } from "../../components/SessionContext";
+import { useState } from "react";
+import { LogoutConfirm } from "../../components/LogoutConfirm";
 
 interface DetailedPin {
     pin: DBDetailedPinProps;
@@ -16,19 +18,27 @@ interface DetailedPin {
 function DetailedPin(props: DetailedPin){
     const {_id, url, author, title, likesCount, dislikesCount, comments} = props.pin;
     const {session} = props;
+    const [logoutConfirmVisible, setLogoutConfirmVisible] = useState(false);
 
-    console.log(session)
+function logoutConfirm() {
+    setLogoutConfirmVisible(true);
+}
+    
+function logoutCancel(){
+    setLogoutConfirmVisible(false);
+}
 
 return <SessionContext.Provider value={session}>
-    <LoggedInHeader avatar={session.avatar} username={session.username} />
-    <DetailedPinComponent id={_id} url={url} title={title} userTag={author.tag} avatar={author.avatar} username={author.username} followers={author.followers} likes={likesCount} dislikes={dislikesCount} comments={comments}/>
+    <LoggedInHeader avatar={session.avatar} username={session.username} logout={logoutConfirm}/>
+    <DetailedPinComponent id={_id} url={url} title={title} authorTag={author.tag} avatar={author.avatar} username={author.username} followers={author.followers} likes={likesCount} dislikes={dislikesCount} comments={comments}/>
+    {logoutConfirmVisible ? <LogoutConfirm logoutCancel={logoutCancel}/> : null}
 </SessionContext.Provider>
 }
 
 
 const getServerSideProps: GetServerSideProps = async (context) => {
 
-    const {id} = context.params;
+    const { id } = context.params;
     const { req } = context;
 
     const { db } = await connectToDatabase();
@@ -54,7 +64,7 @@ const getServerSideProps: GetServerSideProps = async (context) => {
         }
     }
 
-    const pinWithAuthorAndSession = {
+    const pinWithAuthor = {
          ...pin,
         author: {
             id: pin.author,
@@ -68,7 +78,7 @@ const getServerSideProps: GetServerSideProps = async (context) => {
 
     return {
         props: {  
-            pin: JSON.parse(JSON.stringify(pinWithAuthorAndSession)),
+            pin: JSON.parse(JSON.stringify(pinWithAuthor)),
             session: session
         }
     }

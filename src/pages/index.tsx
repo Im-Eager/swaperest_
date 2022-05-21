@@ -9,7 +9,8 @@ import { RegisterForm } from "../components/RegisterForm"
 import{ DBPin , DBUser } from "./database.types"
 import { GetServerSideProps } from "next/types";
 import Router from "next/router";
-import {NewPinButton} from "../components/NewPinButton"
+import {NewPinButton} from "../components/NewPinButton";
+import { LogoutConfirm } from "../components/LogoutConfirm"
 
 
 interface HomepageProps{
@@ -25,6 +26,7 @@ function Homepage(props: HomepageProps) {
     const [pins, setPins] = useState(pinsArray);
     const [loginFormVisible, setLoginFormVisible] = useState(false);
     const [registerFormVisible, setRegisterFormVisible] = useState(false);
+    const [logoutConfirmVisible, setLogoutConfirmVisible] = useState(false);
 
     function handleLogin() {
         setLoginFormVisible(true);
@@ -41,6 +43,14 @@ function Homepage(props: HomepageProps) {
         setRegisterFormVisible(false);
     }
 
+    function logoutConfirm() {
+        setLogoutConfirmVisible(true);
+    }
+
+    function logoutCancel(){
+        setLogoutConfirmVisible(false);
+    }
+
     function onLoginSubmit(){
         Router.reload()
     }
@@ -55,7 +65,10 @@ function Homepage(props: HomepageProps) {
 
     return (
         <>
-            {session ? <LoggedInHeader avatar={avatar} username={session.username} /> : <Header login={handleLogin} register={handleRegister}/>}
+            {session ? 
+            <LoggedInHeader avatar={avatar} username={session.username} logout={logoutConfirm}/> 
+            : 
+            <Header login={handleLogin} register={handleRegister}/>}
             
             <main className={styles.homepage_main}>
                 {pins.map((pin) => (
@@ -74,6 +87,7 @@ function Homepage(props: HomepageProps) {
                 {loginFormVisible ? <LoginForm loginSubmit={onLoginSubmit} onClose={closeLoginAndRegister} onChangeToRegister={handleRegister}/> : null}
                 {registerFormVisible ? <RegisterForm onClose={closeLoginAndRegister} onChangeToLogin={handleLogin} /> : null}
                 <NewPinButton/>
+                {logoutConfirmVisible ? <LogoutConfirm logoutCancel={logoutCancel}/> : null}
             </main>
         </>
     );

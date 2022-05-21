@@ -1,10 +1,7 @@
-import { FormEvent, useRef, useState } from "react";
-import {Session} from "../../pages/index"
+import Router from "next/router";
+import { FormEvent, useContext, useRef, useState } from "react";
+import { SessionContext } from "../SessionContext";
 import styles from "./newPin.module.css";
-
-interface NewPinProps{
-    session: Session
-}
 
 function isImage(url: string) {
     
@@ -19,9 +16,9 @@ function isImage(url: string) {
     return false;
   }
 
-function NewPin(props: NewPinProps) {
+function NewPin() {
 
-    const {session} = props;
+    const session = useContext(SessionContext);
     const imageUrlRef = useRef<HTMLInputElement>(null);
     const titleRef = useRef<HTMLTextAreaElement>(null);
 
@@ -76,6 +73,8 @@ function NewPin(props: NewPinProps) {
                   authorId: session._id
               })
          }).then(res => res.json);
+
+         Router.push("http://localhost:3000")
         
     }
 

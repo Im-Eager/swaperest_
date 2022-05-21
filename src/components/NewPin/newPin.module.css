@@ -66,14 +66,12 @@
     font-size: 25px;
     font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
     padding: 12px;
+    transition: width 0.5s;
+    cursor: pointer;
 }
 
 .newPinSubmitButton:hover {
     background-color: darkred;
-    width: 130px;
-    height: 62px;
-    -webkit-transition: width 3s;
-    transition: width 3s;
 }
 
 .newPinLabel {
