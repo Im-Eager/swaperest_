@@ -3,11 +3,12 @@ import styles from "./RegisterForm.module.css";
 
 interface registerFormProps {
     onClose: () => void;
-    onChangeToLogin: () =>void;
+    onChangeToLogin: () => void;
+    onSubmit: () => void;
 }
 
 function RegisterForm(props: registerFormProps) {
-    const { onClose, onChangeToLogin } = props;
+    const { onClose, onChangeToLogin, onSubmit } = props;
 
     
     const emailRef = useRef<HTMLInputElement>(null);
@@ -37,10 +38,7 @@ function RegisterForm(props: registerFormProps) {
             }),
         })   
 
-        if (response.ok){
-            console.log("asd");
-        }
-        
+        onSubmit();
     }
 
     return (

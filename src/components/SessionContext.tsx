@@ -1,5 +1,6 @@
-import{ createContext } from "react";
+import { createContext } from "react";
+import { Session } from "../pages/index"
 
-const SessionContext = createContext(null);
+const SessionContext = createContext({_id: "defaultSession"} as Session);
 
 export { SessionContext };

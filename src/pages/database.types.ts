@@ -20,6 +20,8 @@ interface DBPin{
     password: string;
     tag: string;
     following: string[];
+    likesGiven: string[];
+    dislikesGiven: string[];
   }
 
   interface DBComment{
@@ -35,6 +37,7 @@ interface DBPin{
     url: string;
     title: string;
     author: {
+        id: string;
         username: string;
         followers: number[];
         avatar: string;

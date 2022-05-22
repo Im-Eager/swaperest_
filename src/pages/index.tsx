@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import { LoggedInHeader } from "../components/LoggedInHeader";
 import { Pin, PinProps } from "../components/Pin";
@@ -11,22 +11,38 @@ import { GetServerSideProps } from "next/types";
 import Router from "next/router";
 import {NewPinButton} from "../components/NewPinButton";
 import { LogoutConfirm } from "../components/LogoutConfirm"
+import { UserPagePin } from "../components/UserPagePin"
+import { SessionContext } from "../components/SessionContext"
+import { RegisterConfirm } from "../components/RegisterConfirm"
 
 
 interface HomepageProps{
   pinsArray: PinProps[];
-  session ?: Session;
+  session: Session;
 }
 
-interface Session extends DBUser{};
+interface Session {
+    _id: string;
+    username: string;
+    avatar: string;
+    saved: string[]
+    likesGiven: string[];
+    dislikesGiven: string[];
+};
 
 function Homepage(props: HomepageProps) {
+
     const { pinsArray, session } = props;
 
-    const [pins, setPins] = useState(pinsArray);
     const [loginFormVisible, setLoginFormVisible] = useState(false);
     const [registerFormVisible, setRegisterFormVisible] = useState(false);
     const [logoutConfirmVisible, setLogoutConfirmVisible] = useState(false);
+    const [registerConfirmVisible, setRegisterConfirmVisible] = useState(false);
+
+    useEffect( () => {if(session._id==="unknown"){
+        setLoginFormVisible(true);
+    }}, [])
+   
 
     function handleLogin() {
         setLoginFormVisible(true);
@@ -52,26 +68,55 @@ function Homepage(props: HomepageProps) {
     }
 
     function onLoginSubmit(){
-        Router.reload()
+            Router.reload()
     }
 
-    let avatar = "";
-
-    if(!session){
-        avatar = "/logo.png";
-    }else{
-        avatar= session.avatar
+    function onRegisterSubmit(){
+        setRegisterFormVisible(false);
+        setRegisterConfirmVisible(true);
+        window.setTimeout(function(){
+            window.location.href = "http://localhost:3000";
+        }, 5000);
     }
 
-    return (
-        <>
-            {session ? 
-            <LoggedInHeader avatar={avatar} username={session.username} logout={logoutConfirm}/> 
-            : 
-            <Header login={handleLogin} register={handleRegister}/>}
-            
+
+    if (!session._id){
+        return <>
+            <Header login={handleLogin} register={handleRegister}/>
             <main className={styles.homepage_main}>
-                {pins.map((pin) => (
+                {pinsArray.map((pin) => (
+                    <UserPagePin
+                        key={pin._id}
+                        id={pin._id}
+                        url={pin.url}
+                        
+                    />
+                ))}
+                {loginFormVisible ? <LoginForm loginSubmit={onLoginSubmit} badLogin={false} onClose={closeLoginAndRegister} onChangeToRegister={handleRegister} /> : null}
+                {registerFormVisible ? <RegisterForm onClose={closeLoginAndRegister} onChangeToLogin={handleLogin} onSubmit={onRegisterSubmit}/> : null}
+                {registerConfirmVisible ? <RegisterConfirm /> : null}
+            </main>
+        </>
+    }else if(session._id==="unknown"){
+        return <>
+        <Header login={handleLogin} register={handleRegister}/>
+        <main className={styles.homepage_main}>
+                {pinsArray.map((pin) => (
+                    <UserPagePin
+                    key={pin._id}
+                    id={pin._id}
+                    url={pin.url}
+                    />
+                ))}
+            {loginFormVisible ? <LoginForm loginSubmit={onLoginSubmit} badLogin={true} onClose={closeLoginAndRegister} onChangeToRegister={handleRegister} /> : null}
+            {registerFormVisible ? <RegisterForm onClose={closeLoginAndRegister} onChangeToLogin={handleLogin} onSubmit={onRegisterSubmit} /> : null}
+         </main>
+        </>
+    }else{
+        return <SessionContext.Provider value={session}>
+            <LoggedInHeader avatar={session.avatar} username={session.username} logout={logoutConfirm}/>
+            <main className={styles.homepage_main}>
+                {pinsArray.map((pin) => (
                     <Pin
                         key={pin._id}
                         _id={pin._id}
@@ -82,15 +127,15 @@ function Homepage(props: HomepageProps) {
                         date={pin.date}
                         likesCount={pin.likesCount}
                         dislikesCount={pin.dislikesCount}
+                        saved={session.saved}
                     />
                 ))}
-                {loginFormVisible ? <LoginForm loginSubmit={onLoginSubmit} onClose={closeLoginAndRegister} onChangeToRegister={handleRegister}/> : null}
-                {registerFormVisible ? <RegisterForm onClose={closeLoginAndRegister} onChangeToLogin={handleLogin} /> : null}
                 <NewPinButton/>
                 {logoutConfirmVisible ? <LogoutConfirm logoutCancel={logoutCancel}/> : null}
             </main>
-        </>
-    );
+        </SessionContext.Provider>
+
+    }
 }
 
 const getServerSideProps: GetServerSideProps = async (context) => {

@@ -8,6 +8,7 @@ import { UserPagePin } from "../../components/UserPagePin"
 import { useState } from "react";
 import { Session } from "../index";
 import { LogoutConfirm } from "../../components/LogoutConfirm";
+import Router from "next/router";
 
 interface UserPageProps{
   user: DBUser;
@@ -15,6 +16,8 @@ interface UserPageProps{
 }
 
 function UserDetailed(props: UserPageProps) {
+
+
 
     const {avatar, username, tag, saved, created, followers, following} = props.user;
     const { session } = props;
@@ -108,6 +111,7 @@ const getServerSideProps: GetServerSideProps = async (context) => {
             } as HeadersInit
         }).then(res => res.json() as Promise<Session>)
     ]);
+  
 
     return {
         props: {

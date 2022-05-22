@@ -9,6 +9,7 @@ import {LoggedInHeader} from "../../components/LoggedInHeader";
 import { SessionContext } from "../../components/SessionContext";
 import { useState } from "react";
 import { LogoutConfirm } from "../../components/LogoutConfirm";
+import { BackToHomePage } from "../../components/BackToHomePage";
 
 interface DetailedPin {
     pin: DBDetailedPinProps;
@@ -18,7 +19,9 @@ interface DetailedPin {
 function DetailedPin(props: DetailedPin){
     const {_id, url, author, title, likesCount, dislikesCount, comments} = props.pin;
     const {session} = props;
-    const [logoutConfirmVisible, setLogoutConfirmVisible] = useState(false);
+
+    
+      const [logoutConfirmVisible, setLogoutConfirmVisible] = useState(false);
 
 function logoutConfirm() {
     setLogoutConfirmVisible(true);
@@ -28,9 +31,13 @@ function logoutCancel(){
     setLogoutConfirmVisible(false);
 }
 
+if (!session._id || session._id==="unknown"){
+    return <BackToHomePage />
+}
+
 return <SessionContext.Provider value={session}>
     <LoggedInHeader avatar={session.avatar} username={session.username} logout={logoutConfirm}/>
-    <DetailedPinComponent id={_id} url={url} title={title} authorTag={author.tag} avatar={author.avatar} username={author.username} followers={author.followers} likes={likesCount} dislikes={dislikesCount} comments={comments}/>
+    <DetailedPinComponent id={_id} url={url} title={title} authorId={author.id} authorTag={author.tag} avatar={author.avatar} username={author.username} followers={author.followers} likes={likesCount} dislikes={dislikesCount} comments={comments}/>
     {logoutConfirmVisible ? <LogoutConfirm logoutCancel={logoutCancel}/> : null}
 </SessionContext.Provider>
 }

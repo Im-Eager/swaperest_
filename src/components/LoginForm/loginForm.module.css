@@ -16,6 +16,12 @@
     box-shadow: rgb(0 0 0 / 40%) 0px 1px 20px 0px;
 }
 
+.invalidLoginDisclaimer{
+    color: red;
+    font-size: 12px;
+    font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
+}
+
 .loginButton {
     background-color: darkred;
     border: 0;
@@ -31,6 +37,7 @@
 
 .loginButton:hover{
     background-color: rgb(96, 35, 35);
+    cursor: pointer;
 }
 
 .form {

@@ -1,16 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styles from './DetailedPin.module.css';
 import { CommentsSection } from "../CommentsSection"
 import { NewCommentSection } from "../NewCommentSection"
 import Router from "next/router";
-import { DBComment, DBUser } from "../../pages/database.types"
-import { Db } from "mongodb";
+import { DBComment, DBUser } from "../../pages/database.types";
+import { SessionContext } from "../SessionContext";
 
 interface DetailedPinProps{
     id: string;
     url: string;
     title: string;
     avatar: string;
+    authorId: string;
     username: string;
     followers: number[];
     likes: number;
@@ -34,13 +35,57 @@ function getWebsiteUrl(originalUrl: string){
 
 
 function DetailedPinComponent(props: DetailedPinProps) {
-    const {id, url, title, avatar, username, followers, likes, dislikes, comments, authorTag} = props;
+    const {id, url, title, avatar, username, followers, likes, dislikes, comments, authorTag, authorId} = props;
+    const session = useContext(SessionContext);
     const websiteUrl = getWebsiteUrl(url);
 
     const[commentButtonIsToggled, setCommentButtonIsToggled] = useState(false);
     const[commentsAreLoaded, setCommentsAreLoaded]= useState(false);
-    const[commentsArray, setCommentsArray] = useState([] as CommentDetailedPin[])
+    const[commentsArray, setCommentsArray] = useState([] as CommentDetailedPin[]);
+    const [isSaved, setIsSaved] = useState(session.saved.includes(id));
+    const [isFollowing, setIsFollowing] = useState(session.following.includes(authorId));
+    const [followersCount, setFollowersCount] = useState(followers.length);
 
+
+    async function handleSaveButton(){
+
+        await fetch("http://localhost:3000/api/users/savedPins", {
+             method: "PUT",
+             headers: {
+                 "Content-Type": "application/json",
+             },
+             body: JSON.stringify({
+                userId: session._id,
+                pinId: id,
+                isSaved: isSaved,
+              })
+         }).then(res => res.json);
+
+        setIsSaved(!isSaved);
+    }
+
+    async function handleFollowButton(){
+
+        await fetch("http://localhost:3000/api/users/following", {
+             method: "PUT",
+             headers: {
+                 "Content-Type": "application/json",
+             },
+             body: JSON.stringify({
+                userId: session._id,
+                isFollowing: isFollowing,
+                pinAuthorId: authorId,
+              })
+         }).then(res => res.json);
+
+         if(!isFollowing){
+            setFollowersCount(followersCount+1);
+         }else{
+            setFollowersCount(followersCount-1);
+         }
+
+        setIsFollowing(!isFollowing);
+    }
 
     async function getComments(comments: string[]){
 
@@ -81,6 +126,7 @@ function DetailedPinComponent(props: DetailedPinProps) {
     if (!commentsAreLoaded){
         getComments(comments);
     }
+
     
     
     return (
@@ -98,7 +144,11 @@ function DetailedPinComponent(props: DetailedPinProps) {
                                     <button className={styles.pinDetailedLikeButton}>💗</button>
                                     <button className={styles.pinDetailedDislikeButton}>💔</button>
                                 </div>
-                                <button className={styles.pinDetailedSaveButton}>Save</button>
+                                { isSaved ? 
+                                 <button  className={styles.pinDetailedSavedButton} onClick={handleSaveButton}>Saved</button> 
+                                :
+                                <button  className={styles.pinDetailedSaveButton} onClick={handleSaveButton}>Save</button> 
+                                }
                             </div>
                         </header>
                         <h1 className={styles.pinDetailedTitle}>{title}</h1>
@@ -113,10 +163,15 @@ function DetailedPinComponent(props: DetailedPinProps) {
                                     <a className={styles.pinDetailedAuthorUsername}>
                                         {username}
                                     </a>
-                                    <footer className={styles.pinDetailedAuthorFollowers}>{followers.length} followers</footer>
+                                    <footer className={styles.pinDetailedAuthorFollowers}>{followersCount} followers</footer>
                                 </div>
                             </div>
-                            <button className={styles.pinDetailedFollowButton}>Follow</button>
+                            { isFollowing ? 
+                                 <button className={styles.pinDetailedFollowButton} onClick={handleFollowButton}>Unfollow</button> 
+                                :
+                                <button className={styles.pinDetailedFollowButton} onClick={handleFollowButton}>Follow</button> 
+                                }
+                            
                         </div>
                         <div className={styles.pinDetailedLikesSection}>
                             <span className={styles.pinDetailedLikes}>{likes} 💗</span>

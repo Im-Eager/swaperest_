@@ -74,6 +74,7 @@ function NewPin() {
               })
          }).then(res => res.json);
 
+         
          Router.push("http://localhost:3000")
         
     }

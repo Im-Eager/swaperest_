@@ -52,6 +52,7 @@
 }
 
 .pinDetailedUrl{
+    text-align: center;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -59,7 +60,7 @@
     font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,ヒラギノ角ゴ Pro W3,Hiragino Kaku Gothic Pro,メイリオ,Meiryo,ＭＳ Ｐゴシック,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
     font-size: 120%;
     margin: 0;
-    height: 48px;
+    height: 60px;
     cursor: pointer;
     font-weight: 700;
     background-color: lightgray;
@@ -95,7 +96,21 @@
 .pinDetailedSaveButton{
     border-radius: 24px;
     border: 0px;
-    background-color: red;
+    background-color: darkred;
+    color: white;
+    font-size: 100%;
+    margin: 0;
+    vertical-align: middle;
+    height: 48px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.pinDetailedSavedButton{
+    border-radius: 24px;
+    border: 0px;
+    background-color: rgb(96, 35, 35);
     color: white;
     font-size: 100%;
     margin: 0;
@@ -107,7 +122,11 @@
 }
 
 .pinDetailedSaveButton:hover{
-    background-color: #ad081b;
+    background-color: rgb(96, 35, 35);
+}
+
+.pinDetailedSavedButton:hover{
+    background-color: darkred;
 }
 
 .pinDetailedLikeButton{

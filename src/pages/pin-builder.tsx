@@ -5,6 +5,7 @@ import { Session } from "./index"
 import { useState } from "react";
 import { LogoutConfirm } from "../components/LogoutConfirm";
 import { SessionContext } from "../components/SessionContext";
+import Router from "next/router";
 
 interface CreateNewPinProps{
     session: Session;
@@ -25,7 +26,7 @@ function CreateNewPin(props: CreateNewPinProps) {
 
     return <SessionContext.Provider value={session}>
         <LoggedInHeader avatar={session.avatar} username={session.username} logout={logoutConfirm}/>
-        <NewPin session={session} />;
+        <NewPin />;
         {logoutConfirmVisible ? <LogoutConfirm logoutCancel={logoutCancel}/> : null}
         </SessionContext.Provider>
 }
@@ -38,6 +39,7 @@ const getServerSideProps: GetServerSideProps = async (context) => {
                 cookie: req.headers.cookie
             } as HeadersInit
         }).then(res => res.json() as Promise<Session>);
+          
     return {
         props: {
             session: session,
