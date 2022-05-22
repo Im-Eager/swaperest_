@@ -102,7 +102,7 @@
     margin: 0;
     vertical-align: middle;
     height: 48px;
-    width: 100%;
+    width: 140px;
     cursor: pointer;
     font-weight: 700;
 }
@@ -116,7 +116,7 @@
     margin: 0;
     vertical-align: middle;
     height: 48px;
-    width: 100%;
+    width: 140px;
     cursor: pointer;
     font-weight: 700;
 }
@@ -135,7 +135,28 @@
     font-size: 200%;
     cursor: pointer;
     transition: 0.5s;
+    border-radius: 50%;
+    color: red;
+    font-size: 40px;
+    width: 56px;
+}
+
+.pinDetailedLikedButton{
+    border: 0px;
+    font-size: 200%;
+    cursor: pointer;
+    transition: 0.5s;
     border-radius: 20px;
+    background-color: rgb(172, 1, 1);
+    border-radius: 50%;
+    color: red;
+    font-size: 40px;
+    width: 50px;
+    width: 56px
+}
+
+.pinDetailedLikedButton:hover{
+    background-color: darkred;
 }
 
 .pinDetailedLikeButton:hover{
@@ -148,7 +169,23 @@
     font-size: 200%;
     cursor: pointer;
     transition: 0.5s;
-    border-radius: 20px;
+    border-radius: 50%;
+    width: 56px;
+}
+
+.pinDetailedDislikedButton{
+    background-color: white;
+    border: 0px;
+    font-size: 200%;
+    cursor: pointer;
+    transition: 0.5s;
+    border-radius: 50%;
+    background-color: rgb(172, 1, 1);
+    width: 56px;
+}
+
+.pinDetailedDislikedButton{
+    background-color: darkRed
 }
 
 .pinDetailedDislikeButton:hover{

@@ -45,6 +45,10 @@ function DetailedPinComponent(props: DetailedPinProps) {
     const [isSaved, setIsSaved] = useState(session.saved.includes(id));
     const [isFollowing, setIsFollowing] = useState(session.following.includes(authorId));
     const [followersCount, setFollowersCount] = useState(followers.length);
+    const [ isLiked, setIsLiked ] = useState(session.likesGiven.includes(id));
+    const [ isDisliked, setIsDisliked ] = useState(session.dislikesGiven.includes(id));
+    const [ likesCount, setLikesCount ] = useState(likes);
+    const [ dislikesCount, setDislikesCount ] = useState(dislikes);
 
 
     async function handleSaveButton(){
@@ -85,6 +89,73 @@ function DetailedPinComponent(props: DetailedPinProps) {
          }
 
         setIsFollowing(!isFollowing);
+    }
+
+    async function handleLiked() {
+
+        await Promise.all([ fetch("http://localhost:3000/api/users/likes", {
+             method: "PUT",
+             headers: {
+                 "Content-Type": "application/json",
+             },
+             body: JSON.stringify({
+                userId: session._id,
+                pinId: id,
+                isLiked: isLiked,
+              })
+         }), fetch("http://localhost:3000/api/pins/likes", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+               likesCount: likesCount,
+               pinId: id,
+               isLiked: isLiked,
+             })
+        })]);
+
+        
+        if(!isLiked){
+            setLikesCount(likesCount+1);
+        }else{
+            setLikesCount(likesCount-1);
+        }
+
+        setIsLiked(!isLiked);
+    }
+
+    async function handleDisliked() {
+        await Promise.all([ fetch("http://localhost:3000/api/users/dislikes", {
+             method: "PUT",
+             headers: {
+                 "Content-Type": "application/json",
+             },
+             body: JSON.stringify({
+                userId: session._id,
+                pinId: id,
+                isDisliked: isDisliked,
+              })
+         }), fetch("http://localhost:3000/api/pins/dislikes", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+               dislikesCount: dislikesCount,
+               pinId: id,
+               isDisliked: isDisliked,
+             })
+        })]);
+
+        
+        if(!isDisliked){
+            setDislikesCount(dislikesCount+1);
+        }else{
+            setDislikesCount(dislikesCount-1);
+        }
+
+        setIsDisliked(!isDisliked);
     }
 
     async function getComments(comments: string[]){
@@ -141,8 +212,14 @@ function DetailedPinComponent(props: DetailedPinProps) {
                             <a className={styles.pinDetailedUrl} target="blank" href={websiteUrl}>{websiteUrl.slice(websiteUrl.indexOf("/")+2)}</a> 
                             <div className={styles.pinDetailedHeaderRightSide}>
                                 <div className={styles.pinDetailedLikeDislikeButton}>
-                                    <button className={styles.pinDetailedLikeButton}>💗</button>
-                                    <button className={styles.pinDetailedDislikeButton}>💔</button>
+                                    {isLiked ?
+                                    <button className={styles.pinDetailedLikedButton} onClick={handleLiked}>❤</button>
+                                    :
+                                    <button className={styles.pinDetailedLikeButton} onClick={handleLiked}>❤</button>}
+                                    {isDisliked ?
+                                    <button className={styles.pinDetailedDislikedButton} onClick={handleDisliked}>💔</button>
+                                    :
+                                    <button className={styles.pinDetailedDislikeButton} onClick={handleDisliked}>💔</button>}
                                 </div>
                                 { isSaved ? 
                                  <button  className={styles.pinDetailedSavedButton} onClick={handleSaveButton}>Saved</button> 
@@ -174,8 +251,8 @@ function DetailedPinComponent(props: DetailedPinProps) {
                             
                         </div>
                         <div className={styles.pinDetailedLikesSection}>
-                            <span className={styles.pinDetailedLikes}>{likes} 💗</span>
-                            <span className={styles.pinDetailedDisikes}>{dislikes} 💔</span>
+                            <span className={styles.pinDetailedLikes}>{likesCount} 💗</span>
+                            <span className={styles.pinDetailedDisikes}>{dislikesCount} 💔</span>
                         </div>
                         <div className={styles.pinDetailedCommentsSection}>
                             <span className={styles.pinDetailedCommentsNumber}>{comments.length} comments</span>

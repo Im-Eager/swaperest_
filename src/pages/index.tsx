@@ -26,6 +26,7 @@ interface Session {
     username: string;
     avatar: string;
     saved: string[]
+    following: string[];
     likesGiven: string[];
     dislikesGiven: string[];
 };
@@ -34,6 +35,7 @@ function Homepage(props: HomepageProps) {
 
     const { pinsArray, session } = props;
 
+    const [pins, setPins] = useState(pinsArray);
     const [loginFormVisible, setLoginFormVisible] = useState(false);
     const [registerFormVisible, setRegisterFormVisible] = useState(false);
     const [logoutConfirmVisible, setLogoutConfirmVisible] = useState(false);
@@ -79,12 +81,20 @@ function Homepage(props: HomepageProps) {
         }, 5000);
     }
 
+    function handleSearchNotLoggedIn(){
+        Router.reload();
+    }
+
+    function handleSearch(word: string){
+         setPins(pinsArray.filter(pin => pin.title.toUpperCase().includes(word.toUpperCase())));
+    }
+
 
     if (!session._id){
         return <>
-            <Header login={handleLogin} register={handleRegister}/>
+            <Header login={handleLogin} register={handleRegister} search={handleSearchNotLoggedIn}/>
             <main className={styles.homepage_main}>
-                {pinsArray.map((pin) => (
+                {pins.map((pin) => (
                     <UserPagePin
                         key={pin._id}
                         id={pin._id}
@@ -99,9 +109,9 @@ function Homepage(props: HomepageProps) {
         </>
     }else if(session._id==="unknown"){
         return <>
-        <Header login={handleLogin} register={handleRegister}/>
+        <Header login={handleLogin} register={handleRegister} search={handleSearchNotLoggedIn}/>
         <main className={styles.homepage_main}>
-                {pinsArray.map((pin) => (
+                {pins.map((pin) => (
                     <UserPagePin
                     key={pin._id}
                     id={pin._id}
@@ -113,10 +123,10 @@ function Homepage(props: HomepageProps) {
          </main>
         </>
     }else{
-        return <SessionContext.Provider value={session}>
-            <LoggedInHeader avatar={session.avatar} username={session.username} logout={logoutConfirm}/>
+        return <SessionContext.Provider value={session} >
+            <LoggedInHeader avatar={session.avatar} username={session.username} onSearch={handleSearch} logout={logoutConfirm}/>
             <main className={styles.homepage_main}>
-                {pinsArray.map((pin) => (
+                {pins.map((pin) => (
                     <Pin
                         key={pin._id}
                         _id={pin._id}

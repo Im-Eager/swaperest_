@@ -24,8 +24,12 @@ function CreateNewPin(props: CreateNewPinProps) {
         setLogoutConfirmVisible(false);
     }
 
+    function onSearch(word: string){
+        Router.push("http://localhost:3000");
+    }
+
     return <SessionContext.Provider value={session}>
-        <LoggedInHeader avatar={session.avatar} username={session.username} logout={logoutConfirm}/>
+        <LoggedInHeader avatar={session.avatar} username={session.username} logout={logoutConfirm} onSearch={onSearch}/>
         <NewPin />;
         {logoutConfirmVisible ? <LogoutConfirm logoutCancel={logoutCancel}/> : null}
         </SessionContext.Provider>

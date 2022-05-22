@@ -84,9 +84,13 @@ function UserDetailed(props: UserPageProps) {
     }
   }
 
+  function onSearch(word: string){
+    Router.push("http://localhost:3000");
+}
+
 
     return (<>
-        <LoggedInHeader avatar={session.avatar} username={session.username} logout={logoutConfirm}/>
+        <LoggedInHeader avatar={session.avatar} username={session.username} logout={logoutConfirm} onSearch={onSearch}/>
         <User avatar={avatar} username={username} tag={tag} followers={followers} created={created} saved={saved} following={following} album={changePins}/>
         <div className={styles.UserDetailedPins}>
         {pinsToShow.map(pin =>  

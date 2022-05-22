@@ -1,15 +1,25 @@
 import Router from 'next/router';
 import Head from "next/head";
 import styles from "./Header.module.css";
+import { useEffect, useRef } from 'react';
 
 interface HeaderProps{
     login : () => void;
     register : () => void;
+    search: () => void;
 }
 
 function Header(props: HeaderProps) {
 
-    const { login, register } = props;
+    const { login, register, search } = props;
+    const searchRef = useRef<HTMLInputElement>(null);
+
+    function handleKeyDown(e){
+        if (e.key == "Enter" && !e.shiftKey) {
+            search();
+        }
+    }
+
 
     return (
         <>
@@ -24,7 +34,8 @@ function Header(props: HeaderProps) {
                 </div>
 
                 
-                <input className={styles.header_search_bar} type="text" placeholder="Search"/>
+                <input className={styles.header_search_bar} type="text" ref={searchRef}  onKeyDown={handleKeyDown} placeholder="Search"/>
+                
                     
                 
                 

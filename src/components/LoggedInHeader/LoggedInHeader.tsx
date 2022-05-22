@@ -1,16 +1,26 @@
 import styles from "./LoggedInHeader.module.css";
 import Router  from "next/router";
 import Head from "next/head";
+import { useRef } from "react";
 
 interface LoggedInHeaderProps {
     avatar: string;
     username: string;
     logout: () => void;
+    onSearch: (word: string) => void;
 }
 
 function LoggedInHeader(props: LoggedInHeaderProps) {
     
-    const {avatar, username, logout} = props;
+    const {avatar, username, logout, onSearch} = props;
+    const searchRef = useRef<HTMLInputElement>(null);
+
+    function handleKeyDown(e){
+        if (e.key == "Enter" && !e.shiftKey) {
+            const search = searchRef.current.value;
+            onSearch(search);
+        }
+    }
 
     return (
         <>
@@ -29,7 +39,7 @@ function LoggedInHeader(props: LoggedInHeaderProps) {
                     />
                 </div>
 
-                <input className={styles.header_search_bar} type="text" placeholder="Search"></input>
+                <input className={styles.header_search_bar} onKeyDown={handleKeyDown} ref={searchRef} type="text" placeholder="Search"></input>
 
                 <div className={styles.header_login_request}>
                     <div className={styles.header_avatar_logout_frame}>

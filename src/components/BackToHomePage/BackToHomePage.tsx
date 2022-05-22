@@ -40,7 +40,7 @@ function BackToHomePage() {
     return (
         <>
             <div className={styles.backHomeContent}>
-            <Header login={handleLogin} register={handleRegister} />
+            <Header login={handleLogin} register={handleRegister} search={()=> Router.push("http://localhost:3000")}/>
             <main className={styles.backHomePageMain}>
                 <h1 className={styles.backHomeAvatar}>🏠</h1>
                 <h2 className={styles.backHometext}> You are not logged in.</h2>

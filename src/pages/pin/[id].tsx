@@ -10,6 +10,7 @@ import { SessionContext } from "../../components/SessionContext";
 import { useState } from "react";
 import { LogoutConfirm } from "../../components/LogoutConfirm";
 import { BackToHomePage } from "../../components/BackToHomePage";
+import Router from "next/router";
 
 interface DetailedPin {
     pin: DBDetailedPinProps;
@@ -31,12 +32,16 @@ function logoutCancel(){
     setLogoutConfirmVisible(false);
 }
 
+function onSearch(word: string){
+    Router.push("http://localhost:3000");
+}
+
 if (!session._id || session._id==="unknown"){
     return <BackToHomePage />
 }
 
 return <SessionContext.Provider value={session}>
-    <LoggedInHeader avatar={session.avatar} username={session.username} logout={logoutConfirm}/>
+    <LoggedInHeader avatar={session.avatar} username={session.username} logout={logoutConfirm} onSearch={onSearch}/>
     <DetailedPinComponent id={_id} url={url} title={title} authorId={author.id} authorTag={author.tag} avatar={author.avatar} username={author.username} followers={author.followers} likes={likesCount} dislikes={dislikesCount} comments={comments}/>
     {logoutConfirmVisible ? <LogoutConfirm logoutCancel={logoutCancel}/> : null}
 </SessionContext.Provider>
