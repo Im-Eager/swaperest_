@@ -15,7 +15,7 @@ function LoggedInHeader(props: LoggedInHeaderProps) {
     const {avatar, username, logout, onSearch} = props;
     const searchRef = useRef<HTMLInputElement>(null);
 
-    function handleKeyDown(e){
+    function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>){
         if (e.key == "Enter" && !e.shiftKey) {
             const search = searchRef.current.value;
             onSearch(search);

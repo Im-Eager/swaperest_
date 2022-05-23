@@ -14,7 +14,7 @@ function Header(props: HeaderProps) {
     const { login, register, search } = props;
     const searchRef = useRef<HTMLInputElement>(null);
 
-    function handleKeyDown(e){
+    function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>){
         if (e.key == "Enter" && !e.shiftKey) {
             search();
         }
