@@ -12,6 +12,8 @@ interface newUserToDB{
   password: string;
   tag: string;
   following: string[];
+  likesGiven: string[];
+  dislikesGiven: string[];
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -35,16 +37,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         created: [] as string[],
         followers: [] as string[],
         following: [] as string[],
+        likesGiven: [] as string[],
+        dislikesGiven: [] as string[],
       }
-    
-    const result = await usersCollection.insertOne(newUser);
-    res.status(201).send(newUser);
+      await usersCollection.insertOne(newUser);
+    res.status(201).json(newUser);
   }
 
   if (req.method === "GET"){
     const usersCollection = db.collection("users")
     const findResult = await usersCollection.find({}).toArray();
-    return res.json(findResult);
+    return res.status(200).json(findResult);
     
   }
 
@@ -58,8 +61,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       $push: { created: pinId.toString() }
     })
 
-    res.status(200).send(userUpdated);
+    res.status(200).json(userUpdated);
   }
-
-
 }

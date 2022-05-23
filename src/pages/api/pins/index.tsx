@@ -10,13 +10,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const pinsCollection = db.collection("pins");
       await pinsCollection.insertOne(req.body);
-      res.status(201).send(req.body);
+      res.status(201).json(req.body);
   }
 
   if (req.method === "GET"){
     const pinsCollection = db.collection("pins")
     const findResult = await pinsCollection.find({}).toArray();
-    return res.json(findResult);
+    return res.status(200).json(findResult);
   }
 
   if (req.method === "PUT") {
@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       $push: { comments: commentId.toString() }
     })
 
-    res.status(200).send(pinUpdated);
+    res.status(200).json(pinUpdated);
 }
 
 }

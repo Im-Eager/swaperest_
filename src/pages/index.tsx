@@ -10,10 +10,12 @@ import{ DBPin , DBUser } from "./database.types"
 import { GetServerSideProps } from "next/types";
 import Router from "next/router";
 import {NewPinButton} from "../components/NewPinButton";
-import { LogoutConfirm } from "../components/LogoutConfirm"
-import { UserPagePin } from "../components/UserPagePin"
+import { LogoutConfirm } from "../components/LogoutConfirm";
 import { SessionContext } from "../components/SessionContext"
 import { RegisterConfirm } from "../components/RegisterConfirm"
+import { UserPagePin } from "../components/UserPagePin"
+
+
 
 
 interface HomepageProps{

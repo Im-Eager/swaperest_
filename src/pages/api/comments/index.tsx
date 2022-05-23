@@ -10,14 +10,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const commentsCollection = db.collection("comments")
     const findResult = await commentsCollection.find({}).toArray();
 
-    return res.json(findResult);
+    return res.status(200).json(findResult);
   }
 
   if (req.method === "POST") {
 
     const commentsCollection = db.collection("comments");
     await commentsCollection.insertOne(req.body);
-    res.status(201).send(req.body);
+    res.status(201).json(req.body);
 }
 
 }

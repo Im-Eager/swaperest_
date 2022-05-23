@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === "GET"){
     const commentsCollection = db.collection("comments")
     const comments = await commentsCollection.find({pin: id}).toArray() as DBComment[];
-    res.json(comments);
+    res.status(200).json(comments);
   }
 
 }
