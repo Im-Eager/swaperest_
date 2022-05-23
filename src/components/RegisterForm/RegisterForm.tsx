@@ -20,6 +20,10 @@ function RegisterForm(props: registerFormProps) {
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
+        if(!emailRef.current ||  !passwordRef.current || !avatarUrlRef.current || !usernameRef.current){
+            return;
+        }
+
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         const avatar = avatarUrlRef.current.value;;
