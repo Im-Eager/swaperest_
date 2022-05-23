@@ -48,4 +48,12 @@ interface DBPin{
     comments: string[];
 }
 
+function Databases() {
+  return (<>
+  {null}
+  </>);
+}
+
+export default Databases;
 export type {DBPin, DBUser, DBDetailedPinProps, DBComment};
+ 
