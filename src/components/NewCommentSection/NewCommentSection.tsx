@@ -13,13 +13,17 @@ function NewCommentSection(props: NewCommentProps) {
     const { pinId } = props;
     const [buttonToggled, setButtonToggled] = useState(false);
 
-    async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        setButtonToggled(true);
+        writeComment();
+    }
+
+    async function writeComment() {
 
         if(!textRef.current){
             return;
         }
-
         const date = Date.now();
         const text = textRef.current.value;
         const code = [date, session._id].join(".");
@@ -51,8 +55,7 @@ function NewCommentSection(props: NewCommentProps) {
               })
          }).then(res => res.json);
 
-        Router.reload();
-        setButtonToggled(true);
+         Router.reload();
     }
 
    
