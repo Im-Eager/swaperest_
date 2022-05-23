@@ -1,4 +1,4 @@
-import { FormEvent, useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
 import styles from "./RegisterForm.module.css";
 
 interface registerFormProps {
@@ -9,6 +9,7 @@ interface registerFormProps {
 
 function RegisterForm(props: registerFormProps) {
     const { onClose, onChangeToLogin, onSubmit } = props;
+    const [isToggled, setIsToggled] = useState(false);
 
     
     const emailRef = useRef<HTMLInputElement>(null);
@@ -17,8 +18,13 @@ function RegisterForm(props: registerFormProps) {
     const usernameRef = useRef<HTMLInputElement>(null);
     
 
-    async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        setIsToggled(true);
+        createAccount(); 
+    }
+
+    async function createAccount() {
 
         if(!emailRef.current ||  !passwordRef.current || !avatarUrlRef.current || !usernameRef.current){
             return;
@@ -43,6 +49,7 @@ function RegisterForm(props: registerFormProps) {
         })   
 
         onSubmit();
+        
     }
 
     return (
