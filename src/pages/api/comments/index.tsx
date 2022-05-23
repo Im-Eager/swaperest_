@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const commentsCollection = db.collection("comments");
     await commentsCollection.insertOne(req.body);
-    res.status(201).json(req.body);
+    return res.status(201).json(req.body);
 }
 
 }

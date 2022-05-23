@@ -41,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         dislikesGiven: [] as string[],
       }
       await usersCollection.insertOne(newUser);
-    res.status(201).json(newUser);
+      return res.status(201).json(newUser);
   }
 
   if (req.method === "GET"){
@@ -61,6 +61,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       $push: { created: pinId.toString() }
     })
 
-    res.status(200).json(userUpdated);
+    return res.status(200).json(userUpdated);
   }
 }

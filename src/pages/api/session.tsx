@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const password = req.cookies.token2;
     
     if(!email){
-        res.status(200).json({
+        return res.status(200).json({
             _id: null,
     });
     }
@@ -22,23 +22,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (!password){
         if(user){
-            res.status(200).json(user);
+            return res.status(200).json(user);
         }else{
-            res.status(200).json({
+            return res.status(200).json({
                 _id: "unknown",
         }); 
         }
     }else{
         if(!user){
-            res.status(200).json({
+            return res.status(200).json({
                     _id: "unknown",
             });
         }else if(user && password!==user.password){
-            res.status(200).json({
+            return res.status(200).json({
                 _id: "unknown",
         });
         }else{
-            res.status(200).json(user);
+            return res.status(200).json(user);
         }
     }
   

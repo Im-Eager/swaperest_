@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === "GET"){
         const pinsCollection = db.collection("pins")
         const pin = await pinsCollection.findOne({"_id": new ObjectId(id.toString())}) as DBPin;
-        res.status(200).json(pin);
+        return res.status(200).json(pin);
   }
 
 }

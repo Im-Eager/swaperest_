@@ -16,10 +16,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const comment = await commentsCollection.findOne({date: Number(date), author: author}) as DBPin;
 
         if(!comment){
-          res.status(403).end;
+          return res.status(403).end;
         }
 
-        res.status(200).json({id: comment._id});
+        return res.status(200).json({id: comment._id});
         
   }
 

@@ -11,13 +11,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === "POST") {
     const gamesCollection = db.collection("comments");
     const result = await gamesCollection.insertOne(req.body) as DBComment;
-    res.status(201).json(result);
+    return res.status(201).json(result);
   }
 
   if (req.method === "GET"){
     const commentsCollection = db.collection("comments")
     const comments = await commentsCollection.find({pin: id}).toArray() as DBComment[];
-    res.status(200).json(comments);
+    return res.status(200).json(comments);
   }
 
 }
