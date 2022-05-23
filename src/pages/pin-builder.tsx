@@ -25,7 +25,7 @@ function CreateNewPin(props: CreateNewPinProps) {
     }
 
     function onSearch(word: string){
-        Router.push("http://localhost:3000");
+        Router.push("https://swaperest-mindswap.vercel.app/");
     }
 
     return <SessionContext.Provider value={session}>
@@ -38,7 +38,7 @@ function CreateNewPin(props: CreateNewPinProps) {
 const getServerSideProps: GetServerSideProps = async (context) => {
     const { req } = context;
 
-    const session=  await fetch("http://localhost:3000/api/session", {
+    const session=  await fetch("https://swaperest-mindswap.vercel.app/api/session", {
             headers: {
                 cookie: req.headers.cookie
             } as HeadersInit

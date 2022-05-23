@@ -24,7 +24,7 @@ function NewCommentSection(props: NewCommentProps) {
         const text = textRef.current.value;
         const code = [date, session._id].join(".");
         
-        await fetch("http://localhost:3000/api/comments", {
+        await fetch("https://swaperest-mindswap.vercel.app/api/comments", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -37,10 +37,10 @@ function NewCommentSection(props: NewCommentProps) {
              })
         });
 
-        const commentID = await fetch(`http://localhost:3000/api/comments/commentbycode/${code}`).then(res => res.json());
+        const commentID = await fetch(`https://swaperest-mindswap.vercel.app/api/comments/commentbycode/${code}`).then(res => res.json());
 
 
-        await fetch("http://localhost:3000/api/pins/", {
+        await fetch("https://swaperest-mindswap.vercel.app/api/pins/", {
              method: "PUT",
              headers: {
                  "Content-Type": "application/json",

@@ -29,7 +29,7 @@ function RegisterForm(props: registerFormProps) {
         const avatar = avatarUrlRef.current.value;;
         const username = usernameRef.current.value;
         
-        const response = await fetch("http://localhost:3000/api/users", {
+        const response = await fetch("https://swaperest-mindswap.vercel.app/api/users", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

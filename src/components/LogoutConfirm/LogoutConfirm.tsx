@@ -14,7 +14,7 @@ function LogoutConfirm(props: LogoutProps) {
 
         document.cookie = `token=logout; max-age=0`;
 
-        Router.push("http://localhost:3000");
+        Router.push("https://swaperest-mindswap.vercel.app/");
     }
 
     return (

@@ -52,7 +52,7 @@ function NewPin() {
         const title = titleRef.current.value;
         const code = [date, session._id].join(".");
         
-        await fetch("http://localhost:3000/api/pins", {
+        await fetch("https://swaperest-mindswap.vercel.app/api/pins", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -69,10 +69,10 @@ function NewPin() {
         })
 
 
-        const pinID = await fetch(`http://localhost:3000/api/pins/pinbycode/${code}`).then(res => res.json());
+        const pinID = await fetch(`https://swaperest-mindswap.vercel.app/api/pins/pinbycode/${code}`).then(res => res.json());
 
 
-        await fetch("http://localhost:3000/api/users/", {
+        await fetch("https://swaperest-mindswap.vercel.app/api/users/", {
              method: "PUT",
              headers: {
                  "Content-Type": "application/json",
@@ -84,7 +84,7 @@ function NewPin() {
          }).then(res => res.json);
 
          
-         Router.push("http://localhost:3000")
+         Router.push("https://swaperest-mindswap.vercel.app/")
         
     }
 

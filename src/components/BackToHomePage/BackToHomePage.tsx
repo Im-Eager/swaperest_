@@ -32,7 +32,7 @@ function BackToHomePage() {
         setRegisterFormVisible(false);
         setRegisterConfirmVisible(true);
         window.setTimeout(function(){
-            window.location.href = "http://localhost:3000";
+            window.location.href = "https://swaperest-mindswap.vercel.app/";
         }, 5000);
     }
 
@@ -40,13 +40,13 @@ function BackToHomePage() {
     return (
         <>
             <div className={styles.backHomeContent}>
-            <Header login={handleLogin} register={handleRegister} search={()=> Router.push("http://localhost:3000")}/>
+            <Header login={handleLogin} register={handleRegister} search={()=> Router.push("https://swaperest-mindswap.vercel.app/")}/>
             <main className={styles.backHomePageMain}>
                 <h1 className={styles.backHomeAvatar}>🏠</h1>
                 <h2 className={styles.backHometext}> You are not logged in.</h2>
-                <button className={styles.backHomeButton} onClick={() => Router.push(`http://localhost:3000`)}>Back To HomePage</button>
+                <button className={styles.backHomeButton} onClick={() => Router.push(`https://swaperest-mindswap.vercel.app/`)}>Back To HomePage</button>
             </main>
-            {loginFormVisible ? <LoginForm loginSubmit={() => Router.push(`http://localhost:3000`)} badLogin={false} onClose={closeLoginAndRegister} onChangeToRegister={handleRegister} /> : null}
+            {loginFormVisible ? <LoginForm loginSubmit={() => Router.push(`https://swaperest-mindswap.vercel.app/`)} badLogin={false} onClose={closeLoginAndRegister} onChangeToRegister={handleRegister} /> : null}
             {registerFormVisible ? <RegisterForm onClose={closeLoginAndRegister} onChangeToLogin={handleLogin} onSubmit={onRegisterSubmit}/> : null}
             {registerConfirmVisible ? <RegisterConfirm /> : null}
             </div>

@@ -104,7 +104,7 @@ function Pin(props: PinProps) {
 
     async function handleSaveButton(){
 
-        await fetch("http://localhost:3000/api/users/savedPins", {
+        await fetch("https://swaperest-mindswap.vercel.app/api/users/savedPins", {
              method: "PUT",
              headers: {
                  "Content-Type": "application/json",
@@ -123,7 +123,7 @@ function Pin(props: PinProps) {
     return (
         <>
             <div className={styles.pin}>
-                <img className={styles.pinImage} onClick={() => Router.push(`http://localhost:3000/pin/${_id}`)} src={url} alt={title} />
+                <img className={styles.pinImage} onClick={() => Router.push(`https://swaperest-mindswap.vercel.app/pin/${_id}`)} src={url} alt={title} />
                 <div  className={styles.author}>
                     {author.username}<span className={styles.date}>  {time}</span>
                 </div>

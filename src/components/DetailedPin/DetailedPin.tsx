@@ -53,7 +53,7 @@ function DetailedPinComponent(props: DetailedPinProps) {
 
     async function handleSaveButton(){
 
-        await fetch("http://localhost:3000/api/users/savedPins", {
+        await fetch("https://swaperest-mindswap.vercel.app/api/users/savedPins", {
              method: "PUT",
              headers: {
                  "Content-Type": "application/json",
@@ -70,7 +70,7 @@ function DetailedPinComponent(props: DetailedPinProps) {
 
     async function handleFollowButton(){
 
-        await fetch("http://localhost:3000/api/users/following", {
+        await fetch("https://swaperest-mindswap.vercel.app/api/users/following", {
              method: "PUT",
              headers: {
                  "Content-Type": "application/json",
@@ -93,7 +93,7 @@ function DetailedPinComponent(props: DetailedPinProps) {
 
     async function handleLiked() {
 
-        await Promise.all([ fetch("http://localhost:3000/api/users/likes", {
+        await Promise.all([ fetch("https://swaperest-mindswap.vercel.app/api/users/likes", {
              method: "PUT",
              headers: {
                  "Content-Type": "application/json",
@@ -103,7 +103,7 @@ function DetailedPinComponent(props: DetailedPinProps) {
                 pinId: id,
                 isLiked: isLiked,
               })
-         }), fetch("http://localhost:3000/api/pins/likes", {
+         }), fetch("https://swaperest-mindswap.vercel.app/api/pins/likes", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -126,7 +126,7 @@ function DetailedPinComponent(props: DetailedPinProps) {
     }
 
     async function handleDisliked() {
-        await Promise.all([ fetch("http://localhost:3000/api/users/dislikes", {
+        await Promise.all([ fetch("https://swaperest-mindswap.vercel.app/api/users/dislikes", {
              method: "PUT",
              headers: {
                  "Content-Type": "application/json",
@@ -136,7 +136,7 @@ function DetailedPinComponent(props: DetailedPinProps) {
                 pinId: id,
                 isDisliked: isDisliked,
               })
-         }), fetch("http://localhost:3000/api/pins/dislikes", {
+         }), fetch("https://swaperest-mindswap.vercel.app/api/pins/dislikes", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -160,7 +160,7 @@ function DetailedPinComponent(props: DetailedPinProps) {
 
     async function getComments(comments: string[]){
 
-        const detailedComments = await fetch(`http://localhost:3000/api/comments/${id}`, {
+        const detailedComments = await fetch(`https://swaperest-mindswap.vercel.app/api/comments/${id}`, {
                 method: "GET",
                 headers: 
             {
@@ -169,7 +169,7 @@ function DetailedPinComponent(props: DetailedPinProps) {
             },
             }).then(res => res.json()) as DBComment[];
 
-        const users = await fetch("http://localhost:3000/api/users").then(res=>res.json()) as DBUser[];
+        const users = await fetch("https://swaperest-mindswap.vercel.app/api/users").then(res=>res.json()) as DBUser[];
 
 
         const userById: Record<string, DBUser> = {};
@@ -233,7 +233,7 @@ function DetailedPinComponent(props: DetailedPinProps) {
                             <div className={styles.pinDetailedAuthorLeftPart}>
                                 <img 
                                     className={styles.pinDetailedAuthorAvatar} 
-                                    onClick={() => Router.push(`http://localhost:3000/user/${authorTag}`)} 
+                                    onClick={() => Router.push(`https://swaperest-mindswap.vercel.app/${authorTag}`)} 
                                     src={avatar} 
                                 />
                                 <div className={styles.pinDetailedAuthorUsernameAndFollowers}>

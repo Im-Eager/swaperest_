@@ -79,7 +79,7 @@ function Homepage(props: HomepageProps) {
         setRegisterFormVisible(false);
         setRegisterConfirmVisible(true);
         window.setTimeout(function(){
-            window.location.href = "http://localhost:3000";
+            window.location.href = "https://swaperest-mindswap.vercel.app/";
         }, 5000);
     }
 
@@ -157,7 +157,7 @@ const getServerSideProps: GetServerSideProps = async (context) => {
     const [pins, users, session] = await Promise.all([
         db.collection("pins").find({}).toArray() as Promise<DBPin[]>,
         db.collection("users").find({}).toArray() as Promise<DBUser[]>,
-        fetch("http://localhost:3000/api/session", {
+        fetch("https://swaperest-mindswap.vercel.app/api/session", {
             headers: {
                 cookie: req.headers.cookie
             } as HeadersInit

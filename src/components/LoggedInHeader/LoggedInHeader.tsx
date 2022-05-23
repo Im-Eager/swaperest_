@@ -36,7 +36,7 @@ function LoggedInHeader(props: LoggedInHeaderProps) {
                 <div className={styles.header_logo}>
                     <img
                         className={styles.header_logo_img}
-                        onClick={() => Router.push(`http://localhost:3000`)}
+                        onClick={() => Router.push(`https://swaperest-mindswap.vercel.app/`)}
                         src="/logo.png"
                         alt="logo"
                     />
@@ -46,7 +46,7 @@ function LoggedInHeader(props: LoggedInHeaderProps) {
 
                 <div className={styles.header_login_request}>
                     <div className={styles.header_avatar_logout_frame}>
-                        <img className={styles.header_img_avatar} onClick={() => Router.push(`http://localhost:3000/user/${username}`)} src={avatar} alt="logo" />
+                        <img className={styles.header_img_avatar} onClick={() => Router.push(`https://swaperest-mindswap.vercel.app/${username}`)} src={avatar} alt="logo" />
                     </div>
                     <div className={styles.header_avatar_logout_frame}>
                         <img className={styles.header_img_logout} src="/logout.png" onClick={logout}/>

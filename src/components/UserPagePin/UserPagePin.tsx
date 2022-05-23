@@ -13,7 +13,7 @@ function UserPagePin(props: UserPagePinProps) {
     return (
         <>
             <div className={styles.pin}>
-                <img className={styles.pinImage} onClick={() => Router.push(`http://localhost:3000/pin/${id}`)} src={url} />
+                <img className={styles.pinImage} onClick={() => Router.push(`https://swaperest-mindswap.vercel.app/pin/${id}`)} src={url} />
             </div>
         </>
     );
