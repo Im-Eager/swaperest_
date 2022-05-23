@@ -37,7 +37,7 @@ function Pin(props: PinProps) {
 
     async function handleLiked() {
 
-        await Promise.all([ fetch("http://localhost:3000/api/users/likes", {
+        await Promise.all([ fetch("https://swaperest-mindswap.vercel.app/api/users/likes", {
              method: "PUT",
              headers: {
                  "Content-Type": "application/json",
@@ -47,7 +47,7 @@ function Pin(props: PinProps) {
                 pinId: _id,
                 isLiked: isLiked,
               })
-         }), fetch("http://localhost:3000/api/pins/likes", {
+         }), fetch("https://swaperest-mindswap.vercel.app/api/pins/likes", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -70,7 +70,7 @@ function Pin(props: PinProps) {
     }
 
     async function handleDisliked() {
-        await Promise.all([ fetch("http://localhost:3000/api/users/dislikes", {
+        await Promise.all([ fetch("https://swaperest-mindswap.vercel.app/api/users/dislikes", {
              method: "PUT",
              headers: {
                  "Content-Type": "application/json",
@@ -80,7 +80,7 @@ function Pin(props: PinProps) {
                 pinId: _id,
                 isDisliked: isDisliked,
               })
-         }), fetch("http://localhost:3000/api/pins/dislikes", {
+         }), fetch("https://swaperest-mindswap.vercel.app/api/pins/dislikes", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

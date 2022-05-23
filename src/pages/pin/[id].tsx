@@ -33,7 +33,7 @@ function logoutCancel(){
 }
 
 function onSearch(word: string){
-    Router.push("http://localhost:3000");
+    Router.push("https://swaperest-mindswap.vercel.app/");
 }
 
 if (!session._id || session._id==="unknown"){
@@ -65,7 +65,7 @@ const getServerSideProps: GetServerSideProps = async (context) => {
   const[pin, users, session] = await Promise.all([ 
     db.collection("pins").findOne({_id : new ObjectId(id.toString())}) as Promise<DBPin>, 
     db.collection("users").find({}).toArray() as Promise<DBUser[]>,
-    fetch("http://localhost:3000/api/session", {
+    fetch("https://swaperest-mindswap.vercel.app/api/session", {
             headers: {
                 cookie: req.headers.cookie
             } as HeadersInit

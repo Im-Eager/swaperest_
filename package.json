@@ -22,7 +22,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next next start"
+    "start": "next start"
   },
   "keywords": [],
   "author": "",
