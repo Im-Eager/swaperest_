@@ -7,9 +7,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     
 
   if (req.method === "GET"){
-    const editionsCollection = db.collection("comments")
-    const findResult = await editionsCollection.find({}).toArray();
-    return res.json(findResult);
+    const commentsCollection = db.collection("comments")
+    const findResult = await commentsCollection.find({}).toArray();
+
+    return res.status(200).json(findResult);
   }
+
+  if (req.method === "POST") {
+
+    const commentsCollection = db.collection("comments");
+    await commentsCollection.insertOne(req.body);
+    res.status(201).json(req.body);
+}
 
 }

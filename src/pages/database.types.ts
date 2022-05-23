@@ -20,11 +20,13 @@ interface DBPin{
     password: string;
     tag: string;
     following: string[];
+    likesGiven: string[];
+    dislikesGiven: string[];
   }
 
   interface DBComment{
     _id: string;
-    user: string;
+    author: string;
     text: string;
     pin: string;
     date: number;
@@ -35,6 +37,7 @@ interface DBPin{
     url: string;
     title: string;
     author: {
+        id: string;
         username: string;
         followers: number[];
         avatar: string;
@@ -45,4 +48,4 @@ interface DBPin{
     comments: string[];
 }
 
-export type {DBPin, DBUser, DBDetailedPinProps};
+export type {DBPin, DBUser, DBDetailedPinProps, DBComment};

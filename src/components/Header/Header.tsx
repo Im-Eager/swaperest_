@@ -1,15 +1,25 @@
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 import Head from "next/head";
 import styles from "./Header.module.css";
+import { useEffect, useRef } from 'react';
 
 interface HeaderProps{
-    login ?: () => void;
-    register ?: () => void;
+    login : () => void;
+    register : () => void;
+    search: () => void;
 }
 
 function Header(props: HeaderProps) {
-    const router = useRouter();
-    const {login, register} = props;
+
+    const { login, register, search } = props;
+    const searchRef = useRef<HTMLInputElement>(null);
+
+    function handleKeyDown(e){
+        if (e.key == "Enter" && !e.shiftKey) {
+            search();
+        }
+    }
+
 
     return (
         <>
@@ -20,10 +30,15 @@ function Header(props: HeaderProps) {
                 <title>Mindarest</title>
 
                 <div className={styles.header_logo}>
-                    <img className={styles.header_logo_img} onClick={() => router.push(`http://localhost:3000`)} src="/logo.png" alt="logo" />
+                    <img className={styles.header_logo_img} onClick={() => Router.push(`http://localhost:3000`)} src="/logo.png" alt="logo" />
                 </div>
 
-                <input className={styles.header_search_bar} type="text" placeholder="Search"></input>
+                
+                <input className={styles.header_search_bar} type="text" ref={searchRef}  onKeyDown={handleKeyDown} placeholder="Search"/>
+                
+                    
+                
+                
 
                 <div className={styles.header_login_request}>
                     <div className={styles.header_login_create_frame}>

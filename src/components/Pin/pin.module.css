@@ -25,42 +25,118 @@
     border-radius: 30px;
     font-size: 15px;
     font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
-    padding: 12px;
+    padding: 12px 0px 12px 0px;
     cursor: pointer;
+    width: 70px;
 }
 
-.pinSaveButton:hover {
-    background-color: rgb(96, 35, 35);;
+.pinSavedButton {
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    opacity: 90%;
+    background-color: rgb(96, 35, 35);
+    border: 0;
+    color: white;
+    border-radius: 30px;
+    font-size: 15px;
+    font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
+    padding: 12px 0px 12px 0px;
+    cursor: pointer;
+    width: 70px;
+}
+
+.pinSaveButton:hover{
+    background-color: rgb(96, 35, 35);
+}
+
+.pinSavedButton:hover{
+    background-color: darkred
 }
 
 .pinSaveButton:hover {
     max-width: 123rem;
 }
 
-.pinLikeButton:hover {
-    background-color: white;
-}
 
-.pinDislikeButton:hover {
-    background-color: white;
-}
-
-.pinLikeButton,
-.pinDislikeButton {
+.pinLikeButton{
     border: 0;
+    width: 45px;
     opacity: 70%;
-    color: darkslategrey;
+    color: black;
     border-radius: 35px;
-    font-size: 12px;
+    font-size: 13px;
     font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
-    padding: 7px;
+    padding: 7px 0 7px 0;
     cursor: pointer;
     transition: 0.5s;
+    padding: 4px 0 7px 0;
+
+}
+
+.pinDislikeButton {
+    border: 0;
+    width: 45px;
+    opacity: 70%;
+    color: black;
+    border-radius: 35px;
+    font-size: 13px;
+    font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
+    padding: 7px 0 7px 0;
+    cursor: pointer;
+    transition: 0.5s;
+    padding: 7px 0 7px 0;
+}
+
+.pinLikedButton{
+    border: 0;
+    width: 45px;
+    opacity: 100%;
+    color: black;
+    border-radius: 35px;
+    font-size: 13px;
+    font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
+    padding: 7px 0 7px 0;
+    cursor: pointer;
+    transition: 0.5s;
+    padding: 4px 0 7px 0;
+    position: absolute;
+    bottom: 4%;
+    left: 2%;
+    background-color: rgb(172, 1, 1);;
+}
+
+
+.pinLikedButton:hover{
+    background-color: darkred;
+}
+
+.pinDislikedButton{
+    border: 0;
+    width: 45px;
+    opacity: 100%;
+    color: black;
+    border-radius: 35px;
+    font-size: 13px;
+    font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
+    padding: 7px 0 7px 0;
+    cursor: pointer;
+    transition: 0.5s;
+    padding: 4px 0 7px 0;
+    position: absolute;
+    bottom: 4%;
+    left: 25%;
+    background-color: rgb(172, 1, 1);; 
+}
+
+.pinDislikedButton:hover{
+    background-color: darkred;
 }
 
 .pinLikeButton:hover,
 .pinDislikeButton:hover{
     opacity: 80%;
+    background-color: white;
 }
 
 .pinLikeButton {
@@ -72,7 +148,7 @@
 .pinDislikeButton {
     position: absolute;
     bottom: 4%;
-    left: 18%;
+    left: 25%;
 }
 
 .author {
@@ -86,6 +162,12 @@
     font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
     font-weight: 600;
     color: darkgray;
+}
+
+.heart{
+    color: red;
+    font-size: 14px;
+    padding-top: 10px;
 }
 
 .loginForm {

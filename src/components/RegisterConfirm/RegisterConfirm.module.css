@@ -1,0 +1,47 @@
+.logo {
+    width: 10%;
+    padding-bottom: 10px;
+}
+.registerDiv {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    padding: 32px 0px;
+    text-align: center;
+    width: 400px;
+    margin: auto;
+    box-shadow: rgb(0 0 0 / 40%) 0px 1px 20px 0px;
+}
+.homeButton {
+    text-decoration: none;
+    width: 220px;
+    background-color: darkred;
+    border: 0;
+    margin-bottom: 18px;
+    color: white;
+    border-radius: 30px;
+    font-size: 20px;
+    font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
+    padding: 12px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.homeButton:hover {
+    background-color: rgb(96, 35, 35);
+}
+.registrationConfirm {
+    padding-bottom: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
+}
+.redirectMessage {
+    height: 100%;
+    padding-top: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
+}

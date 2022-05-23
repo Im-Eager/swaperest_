@@ -7,8 +7,17 @@
     padding-bottom: 20px;
 }
 
-/* .newPinPhotoUrl {
-} */
+.newPin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.newPinImagePreview{
+    height: 300px;
+    border-radius: 12px;
+    border: 5px solid black;
+}
 
 .newPinForm {
     padding-top: 40px;
@@ -18,25 +27,35 @@
     padding-bottom: 40px;
 }
 
-.newPinInput {
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    padding-top: 40px;
+.newPinUrlInput {
     border: none;
-    padding: 0;
+    padding-left: 10px;
     width: 100%;
-    font-weight: 600;
-    height: 48px;
+    height: 40px;
     cursor: text;
     white-space: pre-wrap;
-    font-size: 36px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 400;
     font-family: "Segoe UI", "Fira Sans", "Droid Sans";
-
     background: transparent;
     border-bottom: 1px solid black;
 }
+
+
+    .newPinTitleInput {
+        border: none;
+        padding: 10px;
+        width: 100%;
+        height: 100px;
+        cursor: text;
+        font-size: 20px;
+        font-weight: 400;
+        font-family: "Segoe UI", "Fira Sans", "Droid Sans";
+        background: transparent;
+        border-bottom: 1px solid black;
+        display: flex;
+        flex-wrap: wrap;
+    }
 
 .newPinSubmitButton {
     margin-top: 30px;
@@ -47,20 +66,19 @@
     font-size: 25px;
     font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
     padding: 12px;
+    transition: width 0.5s;
+    cursor: pointer;
 }
 
 .newPinSubmitButton:hover {
     background-color: darkred;
-    width: 130px;
-    height: 62px;
-    -webkit-transition: width 3s;
-    transition: width 3s;
 }
 
 .newPinLabel {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 500px;
     font-size: 25px;
     font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
     font-weight: 600;

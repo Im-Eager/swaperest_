@@ -1,0 +1,53 @@
+.backHomeContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.backHomePageMain{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    width: 400px;
+    margin: auto;
+    height: 300px;
+    box-shadow: rgb(0 0 0 / 40%) 0px 1px 20px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.backHomeAvatar{
+    margin-bottom: 0px;
+    font-size: 50px;    
+}
+
+.backHomeButton {
+    background-color: darkred;
+    border: 0;
+    margin-bottom: 18px;
+    color: white;
+    border-radius: 30px;
+    font-size: 20px;
+    font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
+    padding: 12px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.backHomeButton:hover{
+    background-color: rgb(96, 35, 35);
+    cursor: pointer;
+}
+
+.backHometext{
+    font-size: 20px;
+    font-family: "Segoe UI", "Fira Sans", "Droid Sans", "Helvetica Neue";
+}
+
