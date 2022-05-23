@@ -233,7 +233,7 @@ function DetailedPinComponent(props: DetailedPinProps) {
                             <div className={styles.pinDetailedAuthorLeftPart}>
                                 <img 
                                     className={styles.pinDetailedAuthorAvatar} 
-                                    onClick={() => Router.push(`https://swaperest-mindswap.vercel.app/${authorTag}`)} 
+                                    onClick={() => Router.push(`https://swaperest-mindswap.vercel.app/user/${authorTag}`)} 
                                     src={avatar} 
                                 />
                                 <div className={styles.pinDetailedAuthorUsernameAndFollowers}>
