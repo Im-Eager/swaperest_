@@ -93,7 +93,7 @@ function RegisterForm(props: registerFormProps) {
                         />
                     </label>
 
-                    <button className={styles.registerButton} type="submit">
+                    <button className={styles.registerButton} type="submit" disabled={isToggled}>
                         Continue
                     </button>
                 </form>
