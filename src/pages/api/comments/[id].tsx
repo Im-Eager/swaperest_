@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../../../util/mongodb";
-import {DBUser, DBDetailedPinProps, DBComment } from "../../databaseTypes"
+import { DBComment } from "../../database.types"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   
@@ -10,8 +10,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     
     if (req.method === "POST") {
     const gamesCollection = db.collection("comments");
-    const result = await gamesCollection.insertOne(req.body);
-    res.status(201).json({ message: "Data inserted successfully!" });
+    const result = await gamesCollection.insertOne(req.body) as DBComment;
+    res.status(201).json(result);
   }
 
   if (req.method === "GET"){

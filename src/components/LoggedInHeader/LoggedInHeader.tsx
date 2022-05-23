@@ -17,6 +17,9 @@ function LoggedInHeader(props: LoggedInHeaderProps) {
 
     function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>){
         if (e.key == "Enter" && !e.shiftKey) {
+            if(!searchRef.current){
+                return;
+            }
             const search = searchRef.current.value;
             onSearch(search);
         }

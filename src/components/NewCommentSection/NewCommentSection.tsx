@@ -16,6 +16,10 @@ function NewCommentSection(props: NewCommentProps) {
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
+        if(!textRef.current){
+            return;
+        }
+
         const date = Date.now();
         const text = textRef.current.value;
         const code = [date, session._id].join(".");

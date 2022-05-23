@@ -103,7 +103,7 @@ function UserDetailed(props: UserPageProps) {
 
 const getServerSideProps: GetServerSideProps = async (context) => {
     
-    const { tag } = context.params;
+    const { tag } = context.query;
     const { req } = context;
     
     const { db } = await connectToDatabase();

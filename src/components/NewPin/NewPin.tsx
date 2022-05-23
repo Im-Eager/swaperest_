@@ -25,6 +25,11 @@ function NewPin() {
     const [imageUrl, setImageUrl] = useState("https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921");
 
     function loadImage(){
+
+        if(!imageUrlRef.current){
+            return;
+        }
+        
         const url = imageUrlRef.current.value;
 
         if(!isImage(url)){
@@ -37,6 +42,10 @@ function NewPin() {
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
+
+        if(!imageUrlRef.current || !titleRef.current){
+            return;
+        }
 
         const date = Date.now();
         const imageUrl = imageUrlRef.current.value;

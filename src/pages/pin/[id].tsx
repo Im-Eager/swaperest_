@@ -50,10 +50,17 @@ return <SessionContext.Provider value={session}>
 
 const getServerSideProps: GetServerSideProps = async (context) => {
 
-    const { id } = context.params;
+    const { id } = context.query;
     const { req } = context;
 
     const { db } = await connectToDatabase();
+
+    if(!id){
+        return {props: { pin: null,
+            session: null 
+        }
+    }
+}
 
   const[pin, users, session] = await Promise.all([ 
     db.collection("pins").findOne({_id : new ObjectId(id.toString())}) as Promise<DBPin>, 

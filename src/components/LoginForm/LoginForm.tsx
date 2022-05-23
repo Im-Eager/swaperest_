@@ -18,6 +18,10 @@ function LoginForm(props: loginFormProps) {
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
+        if(!emailRef.current || !passwordRef.current){
+            return;
+        }
+
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         document.cookie = `token=${email}; max-age=9000`;
