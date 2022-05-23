@@ -94,7 +94,7 @@ function UserDetailed(props: UserPageProps) {
         <User avatar={avatar} username={username} tag={tag} followers={followers} created={created} saved={saved} following={following} album={changePins}/>
         <div className={styles.UserDetailedPins}>
         {pinsToShow.map(pin =>  
-          <UserPagePin key={pin._id} id={pin._id}  url={pin.url} />
+          <UserPagePin key={pin._id+username} id={pin._id}  url={pin.url} />
         )}
         </div>
         {logoutConfirmVisible ? <LogoutConfirm logoutCancel={logoutCancel}/> : null}
